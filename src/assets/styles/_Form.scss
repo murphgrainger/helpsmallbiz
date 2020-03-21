@@ -1,5 +1,14 @@
 .support-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   background: $color-light-white;
-  padding: $pad;
+  padding: $pad-double;
 
+}
+
+.donation-types {
+  display: flex;
+  padding-top: $pad-double;
 }

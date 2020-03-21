@@ -18,4 +18,5 @@ export const THEME = {
     'sans-serif'
   ].join(','),
 },
+color: 'black'
 }
