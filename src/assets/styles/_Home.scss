@@ -1,0 +1,19 @@
+.Home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('../images/wayback.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  backdrop-filter: blur(4px);
+
+  min-height: 100vh;
+  min-width: 100vw;
+
+
+.home-content {
+  background-color: rgba(0,38,104, .8);
+  padding: $pad-double;
+}
+}
