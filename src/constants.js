@@ -7,6 +7,10 @@ export const THEME = {
     secondary:
       {
         main: '#DBD56E'
+      },
+    teriary:
+      {
+        main: '#931621'
       }
   },
   typography: {
