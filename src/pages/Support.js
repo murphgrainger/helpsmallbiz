@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button from '../components/Button'
+import Autocomplete from '../components/Autocomplete';
 
 function Home() {
   return (
@@ -14,6 +14,10 @@ function Home() {
         <li>Decide if you want your support public or anonymous.</li>
       </ol>
       </header>
+
+      <form className="support-form" noValidate autoComplete="off">
+        <Autocomplete/>
+      </form>
     </>
   )
 }

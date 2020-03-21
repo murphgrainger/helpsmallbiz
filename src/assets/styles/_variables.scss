@@ -7,3 +7,7 @@ $color-red: #931621;
 $pad: 1em;
 $pad-half: 1.5em;
 $pad-double: 2em;
+
+.MuiAutocomplete-popupIndicator {
+  display: none!important;
+}

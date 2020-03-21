@@ -17,7 +17,7 @@ function Home() {
       </ul>
       </header>
       <div class="button-wrapper">
-        <Button variant="contained" color="primary" href="/support-a-business">Support a Business</Button>
+        <Button variant="contained" color="secondary" href="/support-a-business">Support a Business</Button>
       </div>
     </>
   )
