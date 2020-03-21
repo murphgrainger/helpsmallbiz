@@ -6,12 +6,17 @@ function Home() {
   return (
     <>
       <header className="App-header">
-      <h1>Support Local Businesses</h1>
-      <h4>Either add a new business for others to support, or start supporting a business. People can buy gift cards, donate via Venmo, pledge amounts, or log recent online support.</h4>
+      <h1>Pledge 10,000 Colorado</h1>
+      <h2>Support Colorado Local Businesses</h2>
+      <ul>
+        <li>Add or select a business to support</li>
+        <li>Pledge an amount</li>
+        <li>Buy gift cards or donate via Venmo</li>
+        <li>See who others are donating to</li>
+      </ul>
       </header>
       <div class="button-wrapper">
-        <Button class={'primary block'} text={'Add a Business'} url={'/add-business'}/>
-        <Button class={'secondary block'} text={'Support a Business'} url={'#'}/>
+        <Button className={'primary block'} text={'Support a Business'} url={'/support-a-business'}/>
       </div>
     </>
   )

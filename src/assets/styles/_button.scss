@@ -1,7 +1,11 @@
 .button-wrapper {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   margin-bottom: $pad-double;
+  max-width: 400px;
+  margin: auto;
 }
 
 .button {
