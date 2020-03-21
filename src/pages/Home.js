@@ -1,6 +1,7 @@
 import React from 'react';
 
-import Button from '../components/Button'
+import Button from '@material-ui/core/Button';
+
 
 function Home() {
   return (
@@ -16,7 +17,7 @@ function Home() {
       </ul>
       </header>
       <div class="button-wrapper">
-        <Button className={'primary block'} text={'Support a Business'} url={'/support-a-business'}/>
+        <Button variant="contained" color="primary" href="/support-a-business">Support a Business</Button>
       </div>
     </>
   )
