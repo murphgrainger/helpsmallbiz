@@ -12,7 +12,7 @@ function Home() {
     <Grid item xs={7} className="home-content">
       <header className="App-header">
       <h1>Pledge 10,000 for Colorado</h1>
-      <h3 className="font--yellow noTop--margin">Support COVID-19 Restricted <br></br>Local Businesses</h3>
+      <h3 className="font--yellow noTop--margin">Support COVID-19 Restricted <br></br>Local Businesses & Employees</h3>
       <ul className="goal-list">
         <li>Our goal is for our community to raise $10,000 via Gift Cards, Cash Donations, and Takeout/Delivery/Online Orders. </li>
         <li>If we reach $10,000 of support, the creators of this app will match the $10,000 and donate it to local businesses.</li>
