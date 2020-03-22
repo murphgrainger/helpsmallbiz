@@ -1,3 +1,6 @@
+export const GOOGLE_API_KEY = 'AIzaSyDFw93MLRIha9qQPU_1Lr8GOPOdpAtOhsM';
+
+
 export const THEME = {
     palette: {
     primary:

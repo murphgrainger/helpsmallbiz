@@ -15,6 +15,8 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import Button from '@material-ui/core/Button';
 import Switch from '@material-ui/core/Switch';
 
+import { GOOGLE_API_KEY } from '../constants';
+
 class Home extends Component {
   constructor(props){
   super(props);
@@ -35,6 +37,18 @@ class Home extends Component {
 
   setLocationValue = (value) => {
     this.setState({location: value})
+    this.getPlaceDetails(value.place_id)
+  }
+
+  getPlaceDetails = (id) => {
+    const url = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places&place_id=${id}`
+
+    fetch(url)
+    .then(res => res.json())
+    .then(placeDetails => {
+      console.log(placeDetails);
+    })
+
   }
 
 render() {

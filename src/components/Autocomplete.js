@@ -5,6 +5,8 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
+import { GOOGLE_API_KEY } from '../constants';
+
 import { makeStyles } from '@material-ui/core/styles';
 import parse from 'autosuggest-highlight/parse';
 import throttle from 'lodash/throttle';
@@ -39,7 +41,7 @@ export default function GoogleMaps(props) {
   if (typeof window !== 'undefined' && !loaded.current) {
     if (!document.querySelector('#google-maps')) {
       loadScript(
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyDFw93MLRIha9qQPU_1Lr8GOPOdpAtOhsM&libraries=places',
+        `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places`,
         document.querySelector('head'),
         'google-maps',
       );
