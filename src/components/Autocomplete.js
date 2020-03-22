@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function GoogleMaps() {
+export default function GoogleMaps(props) {
   const classes = useStyles();
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState([]);
@@ -94,6 +94,7 @@ export default function GoogleMaps() {
       options={options}
       autoComplete
       includeInputInList
+      onChange={(event, value) => props.setValue(value)}
       renderInput={params => (
         <TextField
           {...params}

@@ -33,6 +33,10 @@ class Home extends Component {
   this.setState({ ...this.state, [event.target.name]: event.target.checked });
 };
 
+  setLocationValue = (value) => {
+    this.setState({location: value})
+  }
+
 render() {
   return (
       <>
@@ -52,7 +56,7 @@ render() {
            <SearchIcon fontSize="large" xs={1}/>
          </Grid>
          <Grid item xs={10}>
-         <Autocomplete/>
+         <Autocomplete setValue={this.setLocationValue}/>
           </Grid>
         </Grid>
         <Grid container spacing={1} alignItems="center">
