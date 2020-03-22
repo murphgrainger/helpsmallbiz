@@ -1,27 +1,17 @@
 import React, {Component} from 'react';
 
 import Autocomplete from '../components/Autocomplete';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import SearchIcon from '@material-ui/icons/Search';
 import InfoIcon from '@material-ui/icons/Info';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import Button from '@material-ui/core/Button';
-import Switch from '@material-ui/core/Switch';
 import Tooltip from '@material-ui/core/Tooltip';
 import Box from '@material-ui/core/Box';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MailOutlineSharpIcon from '@material-ui/icons/MailOutlineSharp';
-
-
-import { GOOGLE_API_KEY } from '../constants';
 
 class AddBusiness extends Component {
 constructor(props){
@@ -48,7 +38,6 @@ this.state = {
 
 handleChange = (event) => {
   const value = event.target.name === 'terms'? !this.state.terms : event.target.value;
-  console.log(event.target);
   this.setState({[event.target.name]:value});
 };
 
@@ -60,24 +49,27 @@ async getPlaceDetails(id) {
   let service = new window.google.maps.places.PlacesService(document.createElement('div'));
 
    await service.getDetails({placeId:id}, (place, status) => {
-      if (status == window.google.maps.places.PlacesServiceStatus.OK) {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
         this.setState({
           placeSelected:true,
           businessName: place.name,
           businessAddress: place.formatted_address,
           businessPhone: place.formatted_phone_number,
-          businessWebsite: place.website
+          businessWebsite: place.website,
+          place_id: place.place_id
         })
       }
     })
 };
 
 
-onSubmit = (event) => {
-event.preventDefault();
-console.log(this.state);
+  onSubmit = (event) => {
+    event.preventDefault();
+    const { firstName, lastName, email, description, challenge, businessName, place_id} = this.state;
+    const data = {firstName, lastName, email, description, challenge, businessName, place_id} ;
+    console.log(data);
 
-}
+  }
 
 render() {
 return (
@@ -137,7 +129,7 @@ return (
       </Grid>
       <div className="form-footer">
         <Grid container spacing={1} alignItems="center" justify="center">
-          <FormControlLabel control={<Checkbox checked={this.state.terms} onChange={this.handleChange} name="terms" />}
+          <FormControlLabel control={<Checkbox required checked={this.state.terms} onChange={this.handleChange} name="terms" />}
           label="I understand my email will not be distributed or displayed and only will be used by the administrator of this app to verify my submission and completion of my goal."
           />
         </Grid>

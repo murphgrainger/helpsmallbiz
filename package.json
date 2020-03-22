@@ -1,5 +1,5 @@
 {
-  "name": "westbound-pwa",
+  "name": "helplocalbiz",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -23,7 +23,7 @@
     "react-scripts": "3.4.0"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "start-client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
