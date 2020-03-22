@@ -32,6 +32,7 @@ super(props);
     email: "",
     description: "",
     challenge: "",
+    instagram:"",
     terms: false
     }
 
@@ -67,7 +68,7 @@ return (
     <form className="support-form" autoComplete="off" onSubmit={this.onSubmit} >
       <Grid container spacing={1} alignItems="center">
         <Grid item xs={12}>
-          <Autocomplete required setValue={this.setLocationValue} />
+          <Autocomplete setValue={this.setLocationValue} />
         </Grid>
         <Grid container spacing={1} alignItems="center">
           <Grid item xs={12}>
@@ -78,7 +79,7 @@ return (
           </Grid>
         </Grid>
         <p>Your Information &nbsp;</p>
-        <Tooltip title="Your name will be displayed publicly attached to this business. Your email will solely be used by the administrator to confirm your progress towards your goal." aria-label="add" placement="right-start"><InfoIcon color="primary" fontSize="small"/></Tooltip>
+        <Tooltip title="Your name will be displayed publicly attached to this business. Your instagram handle will also appear if you share it.  Your email will solely be used by the administrator to confirm your progress towards your goal." aria-label="add" placement="right-start"><InfoIcon color="primary" fontSize="small"/></Tooltip>
 
         <Grid container spacing={1} alignItems="center">
           <Grid item xs={6}>
@@ -88,17 +89,23 @@ return (
             <TextField required id="standard-basic" variant="outlined" label="Last Name" name="lastName" fullWidth onChange={this.handleChange}/>
           </Grid>
         </Grid>
-        <Grid item xs={12}>
+        <Grid container spacing={1} alignItems="center">
+
+        <Grid item xs={6}>
           <TextField required id="standard-basic" variant="outlined" type="email" label="Email" name="email" fullWidth onChange={this.handleChange}/>
         </Grid>
+        <Grid item xs={6}>
+          <TextField id="standard-basic" variant="outlined" label="Instagram Handle" name="instagram" fullWidth onChange={this.handleChange}/>
+        </Grid>
       </Grid>
+      </Grid>
+
 
       <div className="form-footer">
       <Grid container spacing={1} alignItems="center" justify="center">
         <FormControlLabel
         control={<Checkbox checked={this.state.terms} onChange={this.handleChange} name="terms" />}
         label="I understand my email will not be distributed or displayed and only used by the administrator of this app to verify my submission and completion of my goal."
-
         />
       </Grid>
       <Box mt={2}>

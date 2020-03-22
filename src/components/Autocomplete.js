@@ -103,6 +103,7 @@ export default function GoogleMaps(props) {
           label="Search for a Business"
           variant="outlined"
           fullWidth
+          required
           onChange={handleChange}
         />
       )}
