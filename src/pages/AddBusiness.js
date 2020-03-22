@@ -20,6 +20,7 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MailOutlineSharpIcon from '@material-ui/icons/MailOutlineSharp';
 
+
 import { GOOGLE_API_KEY } from '../constants';
 
 class AddBusiness extends Component {
@@ -27,32 +28,31 @@ constructor(props){
 super(props);
 
 this.state = {
-businessName: "",
-businessAddress: "",
-firstName: "",
-lastName: "",
-email: "",
-description: "",
-challenge: "",
-instagram:"",
-terms: false,
-placeSelected: false
-}
-
+    firstName: "",
+    lastName: "",
+    email: "",
+    description: "",
+    challenge: "",
+    instagram:"",
+    terms: false,
+    placeSelected: "",
+    placeDetails:"",
+    businessName: "",
+    businessAddress: "",
+    businessPhone: "",
+    businessPhoto:"",
+    website:""
+  }
 }
 
 
 handleChange = (event) => {
-const value = event.target.name === 'terms'? !this.state.terms : event.target.value;
-console.log(event.target);
-this.setState({[event.target.name]:value});
+  const value = event.target.name === 'terms'? !this.state.terms : event.target.value;
+  console.log(event.target);
+  this.setState({[event.target.name]:value});
 };
 
 setLocationValue = (value) => {
-  this.setState({
-    businessName: value.structured_formatting.main_text,
-    businessAddress: value.structured_formatting.secondary_text
-  })
   this.getPlaceDetails(value.place_id)
 }
 
@@ -61,7 +61,13 @@ async getPlaceDetails(id) {
 
    await service.getDetails({placeId:id}, (place, status) => {
       if (status == window.google.maps.places.PlacesServiceStatus.OK) {
-        this.setState({placeDetails:place})
+        this.setState({
+          placeSelected:true,
+          businessName: place.name,
+          businessAddress: place.formatted_address,
+          businessPhone: place.formatted_phone_number,
+          businessWebsite: place.website
+        })
       }
     })
 };
@@ -85,7 +91,6 @@ return (
         <Grid item xs={12}>
           <Autocomplete setValue={this.setLocationValue} />
         </Grid>
-        {this.state.placeSelected ? <p>we got a place!!!</p> : null}
         <Grid container spacing={1} alignItems="center">
           <Grid item xs={12}>
             <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose this business?" fullWidth onChange={this.handleChange} />
