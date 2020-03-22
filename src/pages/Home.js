@@ -31,7 +31,7 @@ function Home() {
       <div className="button-wrapper">
       <Grid container spacing={1}>
       <Grid item xs={6}>
-        <Button variant="outlined" color="secondary" href="/support-a-business">See Our Progress</Button>
+        <Button variant="outlined" color="secondary" href="/add-a-business">Add a Business</Button>
         </Grid>
         <Grid item xs={6}>
         <Button variant="contained" color="secondary" href="/support-a-business">Support a Business</Button>

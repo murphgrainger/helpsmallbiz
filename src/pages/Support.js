@@ -17,7 +17,7 @@ import Switch from '@material-ui/core/Switch';
 
 import { GOOGLE_API_KEY } from '../constants';
 
-class Home extends Component {
+class Support extends Component {
   constructor(props){
   super(props);
 
@@ -107,4 +107,4 @@ render() {
   }
 }
 
-export default Home;
+export default Support;
