@@ -14,44 +14,49 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import MailOutlineSharpIcon from '@material-ui/icons/MailOutlineSharp';
 
 class AddBusiness extends Component {
-constructor(props){
-super(props);
+  constructor(props) {
+    super(props);
 
-this.state = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    description: "",
-    challenge: "",
-    instagram:"",
-    terms: false,
-    placeSelected: "",
-    placeDetails:"",
-    businessName: "",
-    businessAddress: "",
-    businessPhone: "",
-    businessPhoto:"",
-    website:""
+    this.state = {
+      firstName: "",
+      lastName: "",
+      email: "",
+      description: "",
+      challenge: "",
+      instagram: "",
+      terms: false,
+      placeSelected: "",
+      placeDetails: "",
+      businessName: "",
+      businessAddress: "",
+      businessPhone: "",
+      businessPhoto: "",
+      website: ""
+    }
   }
-}
 
+  handleChange = (event) => {
+    const value = event.target.name === 'terms'
+      ? !this.state.terms
+      : event.target.value;
+    this.setState({
+      [event.target.name]: value
+    });
+  };
 
-handleChange = (event) => {
-  const value = event.target.name === 'terms'? !this.state.terms : event.target.value;
-  this.setState({[event.target.name]:value});
-};
+  setLocationValue = (value) => {
+    this.getPlaceDetails(value.place_id)
+  }
 
-setLocationValue = (value) => {
-  this.getPlaceDetails(value.place_id)
-}
+  async getPlaceDetails(id) {
+    let service = new window.google.maps.places.PlacesService(document.createElement('div'));
 
-async getPlaceDetails(id) {
-  let service = new window.google.maps.places.PlacesService(document.createElement('div'));
-
-   await service.getDetails({placeId:id}, (place, status) => {
+    await service.getDetails({
+      placeId: id
+    }, (place, status) => {
       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
         this.setState({
-          placeSelected:true,
+          placeSelected: true,
           businessName: place.name,
           businessAddress: place.formatted_address,
           businessPhone: place.formatted_phone_number,
@@ -60,88 +65,105 @@ async getPlaceDetails(id) {
         })
       }
     })
-};
+  };
 
-
-  onSubmit = (event) => {
+  onSubmit = async (event) => {
     event.preventDefault();
-    const { firstName, lastName, email, description, challenge, businessName, place_id} = this.state;
-    const data = {firstName, lastName, email, description, challenge, businessName, place_id} ;
-    console.log(data);
-
+    const {
+      firstName,
+      lastName,
+      email,
+      description,
+      challenge,
+      businessName,
+      place_id
+    } = this.state;
+    const data = {
+      firstName,
+      lastName,
+      email,
+      description,
+      challenge,
+      businessName,
+      place_id
+    };
+    let response = await fetch('/add-business', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+    let result = await response.json();
+    console.log(result);
   }
 
-render() {
-return (
-<>
-  <div className="form-wrapper">
-    <header className="form-header">
+  render() {
+    return (<> < div className = "form-wrapper" > <header className="form-header">
       <h1>Add a Business</h1>
     </header>
     <form className="support-form" autoComplete="off" onSubmit={this.onSubmit}>
-      <Grid container spacing={1} alignItems="center">
-        <Grid item xs={12}>
-          <Autocomplete setValue={this.setLocationValue} />
+      <Grid container="container" spacing={1} alignItems="center">
+        <Grid item="item" xs={12}>
+          <Autocomplete setValue={this.setLocationValue}/>
         </Grid>
-        <Grid container spacing={1} alignItems="center">
-          <Grid item xs={12}>
-            <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose this business?" fullWidth onChange={this.handleChange} />
+        <Grid container="container" spacing={1} alignItems="center">
+          <Grid item="item" xs={12}>
+            <TextField required="required" id="standard-basic" multiline="multiline" rowsMax="2" variant="outlined" name="description" label="Why did you choose this business?" fullWidth="fullWidth" onChange={this.handleChange}/>
           </Grid>
-          <Grid item xs={12}>
-            <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="challenge" label="Your Challenge" fullWidth onChange={this.handleChange} />
+          <Grid item="item" xs={12}>
+            <TextField required="required" id="standard-basic" multiline="multiline" rowsMax="2" variant="outlined" name="challenge" label="Your Challenge" fullWidth="fullWidth" onChange={this.handleChange}/>
           </Grid>
         </Grid>
         <p>Your Information &nbsp;</p>
-        <Tooltip title="Your name will be displayed publicly attached to this business. Your instagram handle will also appear if you share it.  Your email will solely be used for internal communication from the administrator." aria-label="add"
-          placement="right-start">
-          <InfoIcon color="primary" fontSize="small" />
+        <Tooltip title="Your name will be displayed publicly attached to this business. Your instagram handle will also appear if you share it.  Your email will solely be used for internal communication from the administrator." aria-label="add" placement="right-start">
+          <InfoIcon color="primary" fontSize="small"/>
         </Tooltip>
 
-        <Grid container spacing={1} alignItems="center">
-          <Grid item xs={6}>
-            <TextField required id="standard-basic" variant="outlined" label="First Name" name="firstName" fullWidth onChange={this.handleChange} />
+        <Grid container="container" spacing={1} alignItems="center">
+          <Grid item="item" xs={6}>
+            <TextField required="required" id="standard-basic" variant="outlined" label="First Name" name="firstName" fullWidth="fullWidth" onChange={this.handleChange}/>
           </Grid>
-          <Grid item xs={6}>
-            <TextField required id="standard-basic" variant="outlined" label="Last Name" name="lastName" fullWidth onChange={this.handleChange} />
+          <Grid item="item" xs={6}>
+            <TextField required="required" id="standard-basic" variant="outlined" label="Last Name" name="lastName" fullWidth="fullWidth" onChange={this.handleChange}/>
           </Grid>
         </Grid>
-        <Grid container spacing={1} alignItems="center">
+        <Grid container="container" spacing={1} alignItems="center">
 
-          <Grid item xs={6}>
-            <TextField required id="standard-basic" variant="outlined" type="email" label="Email" name="email" placeholder="for internal use only" fullWidth onChange={this.handleChange} InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <MailOutlineSharpIcon />
-            </InputAdornment>
-          ),
-        }} />
+          <Grid item="item" xs={6}>
+            <TextField required="required" id="standard-basic" variant="outlined" type="email" label="Email" name="email" placeholder="for internal use only" fullWidth="fullWidth" onChange={this.handleChange} InputProps={{
+                startAdornment: (<InputAdornment position="start">
+                  <MailOutlineSharpIcon/>
+                </InputAdornment>)
+              }}/>
           </Grid>
-          <Grid item xs={6}>
-            <TextField id="standard-basic" variant="outlined" label="Instagram Handle" name="instagram" placeholder="optional" fullWidth onChange={this.handleChange} InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <InstagramIcon />
-            </InputAdornment>
-          ),
-        }} />
+          <Grid item="item" xs={6}>
+            <TextField id="standard-basic" variant="outlined" label="Instagram Handle" name="instagram" placeholder="optional" fullWidth="fullWidth" onChange={this.handleChange} InputProps={{
+                startAdornment: (<InputAdornment position="start">
+                  <InstagramIcon/>
+                </InputAdornment>)
+              }}/>
           </Grid>
         </Grid>
       </Grid>
       <div className="form-footer">
-        <Grid container spacing={1} alignItems="center" justify="center">
-          <FormControlLabel control={<Checkbox required checked={this.state.terms} onChange={this.handleChange} name="terms" />}
-          label="I understand my email will not be distributed or displayed and only will be used by the administrator of this app to verify my submission and completion of my goal."
-          />
+        <Grid container="container" spacing={1} alignItems="center" justify="center">
+          <FormControlLabel control={<Checkbox required checked = {
+              this.state.terms
+            }
+            onChange = {
+              this.handleChange
+            }
+            name = "terms" />} label="I understand my email will not be distributed or displayed and only will be used by the administrator of this app to verify my submission and completion of my goal."/>
         </Grid>
         <Box mt={2}>
-          <Grid container spacing={1} alignItems="center" justify="center">
+          <Grid container="container" spacing={1} alignItems="center" justify="center">
             <Button className="submit-button" type="submit" variant="contained" color="secondary">Add Business</Button>
           </Grid>
         </Box>
       </div>
     </form>
-  </div>
-</>
+  </div> < />
 )
 }
 }
