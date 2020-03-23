@@ -7,9 +7,13 @@ import AddBusiness from './pages/AddBusiness';
 import Support from './pages/Support';
 import FourOhFour from './pages/FourOhFour';
 
+
+import Navbar from './components/Navbar';
+
 function App() {
   return (
     <div className="App">
+      <Navbar/>
     <main>
       <Switch>
       <Route path='/' component={Home} exact/>

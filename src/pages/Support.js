@@ -1,105 +1,184 @@
 import React, {Component} from 'react';
 
 import Autocomplete from '../components/Autocomplete';
-import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
+import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import SearchIcon from '@material-ui/icons/Search';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import InfoIcon from '@material-ui/icons/Info';
 import Button from '@material-ui/core/Button';
-import Switch from '@material-ui/core/Switch';
+import Tooltip from '@material-ui/core/Tooltip';
+import Box from '@material-ui/core/Box';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import MailOutlineSharpIcon from '@material-ui/icons/MailOutlineSharp';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import MaskedInput from 'react-text-mask'
 
-import {GOOGLE_API_KEY} from '../constants';
 
 class Support extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      privacy: false,
-      radio: 'female'
+      firstName: "",
+      lastName: "",
+      email: "",
+      description: "",
+      challenge: "",
+      instagram: "",
+      terms: false,
+      placeSelected: "",
+      placeDetails: "",
+      businessName: "",
+      businessAddress: "",
+      businessPhone: "",
+      businessPhoto: "",
+      website: ""
     }
   }
-  handleChange = (event) => {
-    this.setState({radio: event.target.value});
-  };
 
-  handlePrivacySelect = (event) => {
+  handleChange = (event) => {
+    const value = event.target.name === 'terms'
+      ? !this.state.terms
+      : event.target.value;
     this.setState({
-      ...this.state,
-      [event.target.name]: event.target.checked
+      [event.target.name]: value
     });
   };
 
   setLocationValue = (value) => {
-    this.setState({location: value})
     this.getPlaceDetails(value.place_id)
   }
 
-  getPlaceDetails = (id) => {
-    const url = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places&place_id=${id}`
+  async getPlaceDetails(id) {
+    let service = new window.google.maps.places.PlacesService(document.createElement('div'));
 
-    fetch(url).then(res => res.json()).then(placeDetails => {
-      console.log(placeDetails);
+    await service.getDetails({
+      placeId: id
+    }, (place, status) => {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        this.setState({
+          placeSelected: true,
+          businessName: place.name,
+          businessAddress: place.formatted_address,
+          businessPhone: place.formatted_phone_number,
+          businessWebsite: place.website,
+          place_id: place.place_id
+        })
+      }
     })
+  };
 
+  onSubmit = async (event) => {
+    event.preventDefault();
+    const {
+      firstName,
+      lastName,
+      email,
+      description,
+      challenge,
+      businessName,
+      place_id,
+      instagram
+    } = this.state;
+    const data = {
+      firstName,
+      lastName,
+      email,
+      description,
+      challenge,
+      businessName,
+      place_id,
+      instagram
+    };
+    let response = await fetch('/add-business', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+    let result = await response.json();
+    console.log(result);
   }
 
   render() {
-    return (<> < header className = "App-header" > <h1>Support a Business</h1>
-    <ol>
-      <li>Find a Business to Support</li>
-      <li>Select how you want to support: Gift Card, Donation, Takeout/Delivery</li>
-      <li>Show the dollar amount you've supported.</li>
-      <li>Decide if you want your support public or anonymous.</li>
-    </ol>
-  </header>
+    return (<> < div className = "form-wrapper" > <header className="form-header">
+      <h1>Log Your Support</h1>
+    </header>
+    <form className="support-form" autoComplete="off" onSubmit={this.onSubmit}>
+      <Grid container spacing={1} alignItems="center">
+        <Grid item xs={12}>
+          <Autocomplete setValue={this.setLocationValue}/>
+        </Grid>
+        <Grid container spacing={1} alignItems="center">
+          <Grid item xs={12}>
+            <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose this business?" fullWidth onChange={this.handleChange}/>
+          </Grid>
+          <Grid item xs={12}>
+            <MaskedInput
+                 mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+               />
+                         <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="amount" label="Amount" fullWidth onChange={this.handleChange} InputProps={{
+                startAdornment: (<InputAdornment position="start">
+                  <AttachMoneyIcon/>
+                </InputAdornment>)
+              }}/>
+              />
+          </Grid>
+        </Grid>
+        <p>Your Information &nbsp;</p>
+        <Tooltip title="Your name will be displayed publicly attached to this business. Your instagram handle will also appear if you share it.  Your email will solely be used for internal communication from the administrator." aria-label="add" placement="right-start">
+          <InfoIcon color="primary" fontSize="small"/>
+        </Tooltip>
 
-  <form className="support-form" noValidate="noValidate" autoComplete="off">
-    <Grid container="container" spacing={1} alignItems="center">
-      <Grid item="item">
-        <SearchIcon fontSize="large" xs={1}/>
+        <Grid container spacing={1} alignItems="center">
+          <Grid item xs={6}>
+            <TextField required id="standard-basic" variant="outlined" label="First Name" name="firstName" fullWidth onChange={this.handleChange}/>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField required id="standard-basic" variant="outlined" label="Last Name" name="lastName" fullWidth onChange={this.handleChange}/>
+          </Grid>
+        </Grid>
+        <Grid container spacing={1} alignItems="center">
+
+          <Grid item xs={6}>
+            <TextField required id="standard-basic" variant="outlined" type="email" label="Email" name="email" placeholder="for internal use only" fullWidth onChange={this.handleChange} InputProps={{
+                startAdornment: (<InputAdornment position="start">
+                  <MailOutlineSharpIcon/>
+                </InputAdornment>)
+              }}/>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField id="standard-basic" variant="outlined" label="Instagram Handle" name="instagram" placeholder="optional" fullWidth onChange={this.handleChange} InputProps={{
+                startAdornment: (<InputAdornment position="start">
+                  <InstagramIcon/>
+                </InputAdornment>)
+              }}/>
+          </Grid>
+        </Grid>
       </Grid>
-      <Grid item="item" xs={10}>
-        <Autocomplete setValue={this.setLocationValue}/>
-      </Grid>
-    </Grid>
-    <Grid container="container" spacing={1} alignItems="center">
-      <Grid item="item">
-        <AttachMoneyIcon fontSize="large"/>
-      </Grid>
-      <Grid item="item">
-        <TextField id="standard-basic" variant="outlined" label="Amount" fullWidth="fullWidth"/>
-      </Grid>
-    </Grid>
-    <Grid container="container" spacing={1} alignItems="center">
-      <FormControl component="fieldset">
-        <RadioGroup aria-label="gender" name="gender1" value={this.state.radio} onChange={this.handleChange}>
-          <FormControlLabel value="donation" control={<Radio />} label="Cash Donation"/>
-          <FormControlLabel value="giftcard" control={<Radio />} label="Gift Card"/>
-          <FormControlLabel value="remoteorder" control={<Radio />} label="Takeout / Delivery / Online Order"/>
-        </RadioGroup>
-      </FormControl>
-    </Grid>
-    <div className="form-footer">
-      <Grid container="container" spacing={1} alignItems="center">
-        <FormControlLabel control={<Switch checked = {
-            this.state.privacy
-          }
-          onChange = {
-            this.handlePrivacySelect
-          }
-          name = "privacy" />} label="Make My Support Anonymous"/>
-      </Grid>
-      <Grid container="container" spacing={1} alignItems="center">
-        <Button variant="contained" color="secondary" href="/support-a-business">Submit Support</Button>
-      </Grid>
-    </div>
-  </form> < />)
-  }
+      <div className="form-footer">
+        <Grid container spacing={1} alignItems="center" justify="center">
+          <FormControlLabel control={<Checkbox required checked = {
+              this.state.terms
+            }
+            onChange = {
+              this.handleChange
+            }
+            name = "terms" />} label="I understand my email will not be distributed or displayed and only will be used by the administrator of this app to verify my submission and completion of my goal."/>
+        </Grid>
+        <Box mt={2}>
+          <Grid container spacing={1} alignItems="center" justify="center">
+            <Button className="submit-button" type="submit" variant="contained" color="secondary">Add Business</Button>
+          </Grid>
+        </Box>
+      </div>
+    </form>
+  </div> < />
+)
+}
 }
 
 export default Support;

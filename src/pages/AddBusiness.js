@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router-dom';
 
 import Autocomplete from '../components/Autocomplete';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -31,7 +32,9 @@ class AddBusiness extends Component {
       businessAddress: "",
       businessPhone: "",
       businessPhoto: "",
-      website: ""
+      website: "",
+      place_id:"",
+      showError: false
     }
   }
 
@@ -60,7 +63,7 @@ class AddBusiness extends Component {
           businessName: place.name,
           businessAddress: place.formatted_address,
           businessPhone: place.formatted_phone_number,
-          businessWebsite: place.website,
+          website: place.website,
           place_id: place.place_id
         })
       }
@@ -69,50 +72,44 @@ class AddBusiness extends Component {
 
   onSubmit = async (event) => {
     event.preventDefault();
-    const {
-      firstName,
-      lastName,
-      email,
-      description,
-      challenge,
-      businessName,
-      place_id
-    } = this.state;
-    const data = {
-      firstName,
-      lastName,
-      email,
-      description,
-      challenge,
-      businessName,
-      place_id
-    };
-    let response = await fetch('/add-business', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'content-type': 'application/json'
+    const { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website } = this.state;
+    const data = { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website };
+      try {
+        let response = await fetch('/add-business', {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
+        let result = await response.json();
+        if (result.status !== 200) throw new Error ()
+        this.props.history.push('/');
       }
+  catch {
+    this.setState({
+      errMessage: "Oops! Something went wrong.",
+      showError: true
     })
-    let result = await response.json();
-    console.log(result);
+
   }
+}
 
   render() {
     return (<> < div className = "form-wrapper" > <header className="form-header">
       <h1>Add a Business</h1>
     </header>
     <form className="support-form" autoComplete="off" onSubmit={this.onSubmit}>
-      <Grid container="container" spacing={1} alignItems="center">
-        <Grid item="item" xs={12}>
+      <Grid container spacing={1} alignItems="center">
+        <Grid item xs={12}>
           <Autocomplete setValue={this.setLocationValue}/>
         </Grid>
-        <Grid container="container" spacing={1} alignItems="center">
-          <Grid item="item" xs={12}>
-            <TextField required="required" id="standard-basic" multiline="multiline" rowsMax="2" variant="outlined" name="description" label="Why did you choose this business?" fullWidth="fullWidth" onChange={this.handleChange}/>
+        <Grid container spacing={1} alignItems="center">
+          <Grid item xs={12}>
+            <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose this business?" fullWidth onChange={this.handleChange}/>
           </Grid>
-          <Grid item="item" xs={12}>
-            <TextField required="required" id="standard-basic" multiline="multiline" rowsMax="2" variant="outlined" name="challenge" label="Your Challenge" fullWidth="fullWidth" onChange={this.handleChange}/>
+          <Grid item xs={12}>
+            <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="challenge" label="Your Challenge" fullWidth onChange={this.handleChange}/>
           </Grid>
         </Grid>
         <p>Your Information &nbsp;</p>
@@ -120,25 +117,25 @@ class AddBusiness extends Component {
           <InfoIcon color="primary" fontSize="small"/>
         </Tooltip>
 
-        <Grid container="container" spacing={1} alignItems="center">
-          <Grid item="item" xs={6}>
-            <TextField required="required" id="standard-basic" variant="outlined" label="First Name" name="firstName" fullWidth="fullWidth" onChange={this.handleChange}/>
+        <Grid container spacing={1} alignItems="center">
+          <Grid item xs={6}>
+            <TextField required id="standard-basic" variant="outlined" label="First Name" name="firstName" fullWidth onChange={this.handleChange}/>
           </Grid>
-          <Grid item="item" xs={6}>
-            <TextField required="required" id="standard-basic" variant="outlined" label="Last Name" name="lastName" fullWidth="fullWidth" onChange={this.handleChange}/>
+          <Grid item xs={6}>
+            <TextField required id="standard-basic" variant="outlined" label="Last Name" name="lastName" fullWidth onChange={this.handleChange}/>
           </Grid>
         </Grid>
-        <Grid container="container" spacing={1} alignItems="center">
+        <Grid container spacing={1} alignItems="center">
 
-          <Grid item="item" xs={6}>
-            <TextField required="required" id="standard-basic" variant="outlined" type="email" label="Email" name="email" placeholder="for internal use only" fullWidth="fullWidth" onChange={this.handleChange} InputProps={{
+          <Grid item xs={6}>
+            <TextField required id="standard-basic" variant="outlined" type="email" label="Email" name="email" placeholder="for internal use only" fullWidth onChange={this.handleChange} InputProps={{
                 startAdornment: (<InputAdornment position="start">
                   <MailOutlineSharpIcon/>
                 </InputAdornment>)
               }}/>
           </Grid>
-          <Grid item="item" xs={6}>
-            <TextField id="standard-basic" variant="outlined" label="Instagram Handle" name="instagram" placeholder="optional" fullWidth="fullWidth" onChange={this.handleChange} InputProps={{
+          <Grid item xs={6}>
+            <TextField id="standard-basic" variant="outlined" label="Instagram Handle" name="instagram" placeholder="optional" fullWidth onChange={this.handleChange} InputProps={{
                 startAdornment: (<InputAdornment position="start">
                   <InstagramIcon/>
                 </InputAdornment>)
@@ -147,7 +144,7 @@ class AddBusiness extends Component {
         </Grid>
       </Grid>
       <div className="form-footer">
-        <Grid container="container" spacing={1} alignItems="center" justify="center">
+        <Grid container spacing={1} alignItems="center" justify="center">
           <FormControlLabel control={<Checkbox required checked = {
               this.state.terms
             }
@@ -157,10 +154,15 @@ class AddBusiness extends Component {
             name = "terms" />} label="I understand my email will not be distributed or displayed and only will be used by the administrator of this app to verify my submission and completion of my goal."/>
         </Grid>
         <Box mt={2}>
-          <Grid container="container" spacing={1} alignItems="center" justify="center">
+          <Grid container spacing={1} alignItems="center" justify="center">
             <Button className="submit-button" type="submit" variant="contained" color="secondary">Add Business</Button>
           </Grid>
         </Box>
+        {this.state.showError &&
+          <Box mt={2}>
+            <p>{this.state.errMessage}</p>
+          </Box>
+        }
       </div>
     </form>
   </div> < />
@@ -168,4 +170,4 @@ class AddBusiness extends Component {
 }
 }
 
-export default AddBusiness;
+export default withRouter(AddBusiness);
