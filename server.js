@@ -8,12 +8,6 @@ const business = require('./business');
 
 const port = process.env.PORT || 8080;
 
-
-if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
-  require('babel-register')({
-    presets: [ 'es2015' ]
-  });
-}
 const app = express();
 
 app.use(bodyParser.json())
