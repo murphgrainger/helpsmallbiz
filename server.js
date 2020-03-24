@@ -19,7 +19,7 @@ app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
 
 
-app.use('/add-business', business);
+app.use('/business', business);
 
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html')); //serving build folder

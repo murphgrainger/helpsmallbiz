@@ -15,5 +15,9 @@ module.exports = {
       businessPhone: b.businessPhone,
       website: b.website
     })
+  },
+
+  getAllBusinesses: function() {
+    return knex('business').select('*');
   }
 };
