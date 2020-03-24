@@ -1,12 +1,11 @@
 .App {
   text-align: center;
-  background-color: $color-navy;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
+  background: linear-gradient(164deg, rgba(2,0,36,.9) 0%, rgba(0,38,104,.9) 75%, rgba(50,103,113,.8) 100%);
 }
 
 .App-logo {
@@ -31,6 +30,10 @@
   align-items: center;
   justify-content: center;
   flex: 1;
+  padding: $pad;
+  max-width: 900px;
+  color: white;
+  filter: blur(0);
 }
 
 
