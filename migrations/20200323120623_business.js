@@ -1,7 +1,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('business', function(table) {
     table.increments();
-    table.timestamps([true], [true]);
+    table.timestamp('created_at').defaultTo(knex.fn.now());
     table.text('firstName').notNullable();
     table.text('lastName').notNullable();
     table.text('email').notNullable();

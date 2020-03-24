@@ -27,11 +27,10 @@ class Home extends Component {
         }
       })
       let result = await response.json();
-      console.log(result);
       let cards = result.map((biz,i) => {
         return (
-        <Box m={2}>
-          <CardBusiness key={i} info={biz}/>
+        <Box m={2} key={i} >
+          <CardBusiness info={biz}/>
         </Box>)
       })
       this.setState({
@@ -83,7 +82,9 @@ render() {
     </Grid>
       </div>
     </Grid>
-      <Grid item xs={5} className="side-bar-image">
+      <Grid container item xs={5} className="goal-bar" alignItems="center">
+        <h2>Current Goals</h2>
+
         {this.state.cards}
 
     </Grid>

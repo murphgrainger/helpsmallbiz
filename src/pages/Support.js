@@ -48,6 +48,7 @@ class Support extends Component {
   };
 
   setLocationValue = (value) => {
+    console.log(value.place_id);
     this.getPlaceDetails(value.place_id)
   }
 
@@ -117,15 +118,11 @@ class Support extends Component {
             <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose this business?" fullWidth onChange={this.handleChange}/>
           </Grid>
           <Grid item xs={12}>
-            <MaskedInput
-                 mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
-               />
-                         <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="amount" label="Amount" fullWidth onChange={this.handleChange} InputProps={{
+             <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="amount" label="Amount" fullWidth onChange={this.handleChange} InputProps={{
                 startAdornment: (<InputAdornment position="start">
                   <AttachMoneyIcon/>
                 </InputAdornment>)
               }}/>
-              />
           </Grid>
         </Grid>
         <p>Your Information &nbsp;</p>

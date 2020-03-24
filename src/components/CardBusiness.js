@@ -1,5 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
+
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -21,11 +23,11 @@ import image from '../assets/images/tennyson-st.jpg';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 345,
+    maxWidth: 450,
   },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '30%', // 16:9
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -79,36 +81,34 @@ export default function CardBusiness(props) {
          {props.info.businessAddress}
        </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          {props.info.description}
-        </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
           {props.info.challenge}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <CardActions>
-      <Button size="small" color="primary" variant="outlined">
-        Log Support
-      </Button>
+          <Link to="/support-a-business">
+            <Button size="small" color="primary" variant="contained">
+              Log Support
+            </Button>
+          </Link>
+
     </CardActions>
-        <IconButton
+        <Button
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,
           })}
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
-        >
-        <Button size="small" color="primary" variant="outlined">
-          See Goal
-        </Button>
-        </IconButton>
+          size="small" color="primary" variant="outlined">See Goal Progress
+              </Button>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>Method:</Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {props.info.description}
+          </Typography>
           <Typography paragraph>
-          {props.info.challenge}
           {props.info.businessPhone}
           {props.info.website}
           </Typography>
