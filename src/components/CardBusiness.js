@@ -24,9 +24,13 @@ import image from '../assets/images/tennyson-st.jpg';
 const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 450,
+    marginLeft: 12,
+    display: 'flex',
+    flexDirection: 'column'
   },
   media: {
     height: 0,
+    flexGrow: 1,
     paddingTop: '30%', // 16:9
   },
   expand: {
@@ -36,8 +40,10 @@ const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.shortest,
     }),
   },
-  expandOpen: {
-    transform: 'rotate(180deg)',
+  cardContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 2
   },
   avatar: {
     backgroundColor: '#fff',
@@ -73,7 +79,7 @@ export default function CardBusiness(props) {
        image={image}
        title={props.info.businessName}
      />
-      <CardContent>
+   <CardContent className={classes.cardContent}>
       <Typography gutterBottom variant="h5" component="h2">
          {props.info.businessName}
        </Typography>
@@ -86,7 +92,7 @@ export default function CardBusiness(props) {
       </CardContent>
       <CardActions disableSpacing>
         <CardActions>
-          <Link to="/support-a-business">
+          <Link to={{pathname: "/support-a-business", state:{business: props.info}}}>
             <Button size="small" color="primary" variant="contained">
               Log Support
             </Button>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router-dom';
 
-import Autocomplete from '../components/Autocomplete';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
@@ -13,6 +13,8 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MailOutlineSharpIcon from '@material-ui/icons/MailOutlineSharp';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import CardContact from '../components/CardContact';
+
 import MaskedInput from 'react-text-mask'
 
 
@@ -25,18 +27,20 @@ class Support extends Component {
       lastName: "",
       email: "",
       description: "",
-      challenge: "",
-      instagram: "",
       terms: false,
-      placeSelected: "",
-      placeDetails: "",
       businessName: "",
-      businessAddress: "",
-      businessPhone: "",
-      businessPhoto: "",
-      website: ""
+      business: {}
     }
   }
+
+  componentDidMount() {
+    if (this.props.location.state && this.props.location.state.business) {
+          const {business} = this.props.location.state;
+          this.setState({business: business, businessName: business.businessName})
+      } else {
+        this.props.history.push('/')
+      }
+    }
 
   handleChange = (event) => {
     const value = event.target.name === 'terms'
@@ -105,13 +109,15 @@ class Support extends Component {
   }
 
   render() {
-    return (<> < div className = "form-wrapper" > <header className="form-header">
+    return (<>
+
+      <div className = "form-wrapper" > <header className="form-header">
       <h1>Log Your Support</h1>
     </header>
     <form className="support-form" autoComplete="off" onSubmit={this.onSubmit}>
       <Grid container spacing={1} alignItems="center">
-        <Grid item xs={12}>
-          <Autocomplete setValue={this.setLocationValue}/>
+        <Grid item xs={12} container justify="center">
+          <CardContact info={this.state.business}/>
         </Grid>
         <Grid container spacing={1} alignItems="center">
           <Grid item xs={12}>
