@@ -80,11 +80,11 @@ export default function CardBusiness(props) {
    <Grid item xs={9}>
      <Grid container spacing={1} justify="space-between" className={classes.header}>
        <Grid item xs={9} className={classes.alignLeft}>
-         <Typography gutterBottom variant="h5" component="h2">
-            {props.info.businessName} 
-            <a href={`https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${props.info.place_id}`} target="_blank"><LocationOnIcon fontSize="small"/></a>
-            <a href={`tel:${props.info.businessPhone}`}><PhoneIcon fontSize="small"/></a>
-            <a href={props.info.website} target="_blank"><LanguageIcon fontSize="small"/></a>
+         <Typography variant="h5" component="h2">
+            {props.info.businessName}
+            <a href={`https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${props.info.place_id}`} target="_blank"><IconButton size="small"><LocationOnIcon fontSize="small"/></IconButton></a>
+            <a href={`tel:${props.info.businessPhone}`}><IconButton size="small"><PhoneIcon fontSize="small"/></IconButton></a>
+            <a href={props.info.website} target="_blank"><IconButton size="small"><LanguageIcon fontSize="small"/></IconButton></a>
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             {props.info.description}

@@ -79,6 +79,8 @@ render() {
     <Grid container item xs={12} className="goal-bar" justify="center" id="goals">
       {this.state.cards}
     </Grid>
+    <p>Want to add different goal?</p>
+    <Button variant="contained" color="secondary" href="/add-a-business">Add a Goal</Button>
     </Container>
   </div>
     </div>

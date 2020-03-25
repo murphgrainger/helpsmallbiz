@@ -13,7 +13,13 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MailOutlineSharpIcon from '@material-ui/icons/MailOutlineSharp';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+
 import CardContact from '../components/CardContact';
+
 
 import MaskedInput from 'react-text-mask'
 
@@ -121,7 +127,7 @@ class Support extends Component {
         </Grid>
         <Grid container spacing={1} alignItems="center">
           <Grid item xs={12}>
-            <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose this business?" fullWidth onChange={this.handleChange}/>
+            <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose this business goal?" fullWidth onChange={this.handleChange}/>
           </Grid>
           <Grid item xs={12}>
              <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="amount" label="Amount" fullWidth onChange={this.handleChange} InputProps={{
@@ -130,12 +136,22 @@ class Support extends Component {
                 </InputAdornment>)
               }}/>
           </Grid>
+          <FormLabel component="legend" className="radio-label">Log How You Supported this Goal</FormLabel>
+          <Grid container spacing={1} alignItems="center">
+          <FormControl component="fieldset">
+            <RadioGroup aria-label="gender" name="gender1" value={this.state.radio} onChange={this.handleChange}>
+              <FormControlLabel value="female" control={<Radio />} label="Gift Card" />
+              <FormControlLabel value="male" control={<Radio />} label="Cash Donation" />
+              <FormControlLabel value="other" control={<Radio />} label="Online Order / Delivery / Takeout" />
+              <FormControlLabel value="disabled"  control={<Radio />} label="Other" />
+            </RadioGroup>
+          </FormControl>
         </Grid>
-        <p>Your Information &nbsp;</p>
-        <Tooltip title="Your name will be displayed publicly attached to this business. Your instagram handle will also appear if you share it.  Your email will solely be used for internal communication from the administrator." aria-label="add" placement="right-start">
+        </Grid>
+          <FormLabel component="legend" className="form-label--info">Your Info &nbsp;</FormLabel>
+          <Tooltip title="Your name will be displayed publicly attached to this business. Your instagram handle will also appear if you share it.  Your email will solely be used for internal communication from the administrator." aria-label="add" placement="right-start">
           <InfoIcon color="primary" fontSize="small"/>
         </Tooltip>
-
         <Grid container spacing={1} alignItems="center">
           <Grid item xs={6}>
             <TextField required id="standard-basic" variant="outlined" label="First Name" name="firstName" fullWidth onChange={this.handleChange}/>
