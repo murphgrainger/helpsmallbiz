@@ -1,18 +1,25 @@
 .Home {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(164deg, rgba(2,0,36,.9) 0%, rgba(0,38,104,.9) 75%, rgba(50,103,113,.8) 100%);
   min-height: 100vh;
   min-width: 100vw;
 
 .home-content {
-  padding: $pad-double;
+  padding: $pad-triple;
+  width: 100%;
+
 }
 
 .home-list {
   padding: 0 2em;
   max-width: 400px;
+}
+
+.goal-bar {
+  display: flex;
+  border-radius: 5px;
 }
 
 .goal-list li {

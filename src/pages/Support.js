@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
+import { withRouter } from 'react-router-dom';
 
-import Autocomplete from '../components/Autocomplete';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
@@ -13,6 +13,15 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MailOutlineSharpIcon from '@material-ui/icons/MailOutlineSharp';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Container from '@material-ui/core/Container';
+
+import CardContact from '../components/CardContact';
+
+
 import MaskedInput from 'react-text-mask'
 
 
@@ -25,18 +34,20 @@ class Support extends Component {
       lastName: "",
       email: "",
       description: "",
-      challenge: "",
-      instagram: "",
       terms: false,
-      placeSelected: "",
-      placeDetails: "",
       businessName: "",
-      businessAddress: "",
-      businessPhone: "",
-      businessPhoto: "",
-      website: ""
+      business: {}
     }
   }
+
+  componentDidMount() {
+    if (this.props.location.state && this.props.location.state.business) {
+          const {business} = this.props.location.state;
+          this.setState({business: business, businessName: business.businessName})
+      } else {
+        this.props.history.push('/')
+      }
+    }
 
   handleChange = (event) => {
     const value = event.target.name === 'terms'
@@ -48,6 +59,7 @@ class Support extends Component {
   };
 
   setLocationValue = (value) => {
+    console.log(value.place_id);
     this.getPlaceDetails(value.place_id)
   }
 
@@ -104,35 +116,43 @@ class Support extends Component {
   }
 
   render() {
-    return (<> < div className = "form-wrapper" > <header className="form-header">
+    return (<div className="section Support">
+    <Container maxWidth="lg" className="container">
+      <div className = "form-wrapper" > <header className="form-header">
       <h1>Log Your Support</h1>
     </header>
     <form className="support-form" autoComplete="off" onSubmit={this.onSubmit}>
       <Grid container spacing={1} alignItems="center">
-        <Grid item xs={12}>
-          <Autocomplete setValue={this.setLocationValue}/>
+        <Grid item xs={12} container justify="center">
+          <CardContact info={this.state.business}/>
         </Grid>
         <Grid container spacing={1} alignItems="center">
           <Grid item xs={12}>
-            <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose this business?" fullWidth onChange={this.handleChange}/>
+            <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose this business goal?" fullWidth onChange={this.handleChange}/>
           </Grid>
           <Grid item xs={12}>
-            <MaskedInput
-                 mask={['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
-               />
-                         <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="amount" label="Amount" fullWidth onChange={this.handleChange} InputProps={{
+             <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="amount" label="Amount" fullWidth onChange={this.handleChange} InputProps={{
                 startAdornment: (<InputAdornment position="start">
                   <AttachMoneyIcon/>
                 </InputAdornment>)
               }}/>
-              />
           </Grid>
+          <FormLabel component="legend" className="radio-label">Log How You Supported this Goal</FormLabel>
+          <Grid container spacing={1} alignItems="center">
+          <FormControl component="fieldset">
+            <RadioGroup aria-label="gender" name="gender1" value={this.state.radio} onChange={this.handleChange}>
+              <FormControlLabel value="female" control={<Radio />} label="Gift Card" />
+              <FormControlLabel value="male" control={<Radio />} label="Cash Donation" />
+              <FormControlLabel value="other" control={<Radio />} label="Online Order / Delivery / Takeout" />
+              <FormControlLabel value="disabled"  control={<Radio />} label="Other" />
+            </RadioGroup>
+          </FormControl>
         </Grid>
-        <p>Your Information &nbsp;</p>
-        <Tooltip title="Your name will be displayed publicly attached to this business. Your instagram handle will also appear if you share it.  Your email will solely be used for internal communication from the administrator." aria-label="add" placement="right-start">
+        </Grid>
+          <FormLabel component="legend" className="form-label--info">Your Info &nbsp;</FormLabel>
+          <Tooltip title="Your name will be displayed publicly attached to this business. Your instagram handle will also appear if you share it.  Your email will solely be used for internal communication from the administrator." aria-label="add" placement="right-start">
           <InfoIcon color="primary" fontSize="small"/>
         </Tooltip>
-
         <Grid container spacing={1} alignItems="center">
           <Grid item xs={6}>
             <TextField required id="standard-basic" variant="outlined" label="First Name" name="firstName" fullWidth onChange={this.handleChange}/>
@@ -176,7 +196,7 @@ class Support extends Component {
         </Box>
       </div>
     </form>
-  </div> < />
+  </div> </Container></div>
 )
 }
 }
