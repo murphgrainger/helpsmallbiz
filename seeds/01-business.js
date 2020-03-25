@@ -1,6 +1,6 @@
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('business').del()
+  return knex.raw('DELETE FROM "business"; ALTER SEQUENCE business_id_seq RESTART WITH 1;')
     .then(function () {
       // Inserts seed entries
       return knex('business').insert([
