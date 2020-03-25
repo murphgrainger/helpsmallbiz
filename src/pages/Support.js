@@ -17,6 +17,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
+import Container from '@material-ui/core/Container';
 
 import CardContact from '../components/CardContact';
 
@@ -115,8 +116,8 @@ class Support extends Component {
   }
 
   render() {
-    return (<>
-
+    return (<div className="section Support">
+    <Container maxWidth="lg" className="container">
       <div className = "form-wrapper" > <header className="form-header">
       <h1>Log Your Support</h1>
     </header>
@@ -195,7 +196,7 @@ class Support extends Component {
         </Box>
       </div>
     </form>
-  </div> < />
+  </div> </Container></div>
 )
 }
 }

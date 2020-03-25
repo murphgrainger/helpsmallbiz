@@ -42,3 +42,22 @@ ul,ol {
 .noBottom--margin {
   margin-bottom: 0;
 }
+
+main {
+  width: 100%;
+}
+
+.section {
+  background: linear-gradient(164deg, rgba(2,0,36,.9) 0%, rgba(0,38,104,.9) 75%, rgba(50,103,113,.8) 100%);
+  width: 100%;
+  padding: $pad-triple 0;
+
+  &.-grey {
+    background: $color-grey;
+  }
+}
+
+.Support .container {
+  display: flex;
+  justify-content: center;
+}
