@@ -50,6 +50,9 @@ const styles = theme => ({
       duration: theme.transitions.duration.shortest,
     }),
   },
+   expandOpen: {
+    transform: 'rotate(180deg)',
+  },
   cardContent: {
     display: 'flex',
     flexDirection: 'column',
@@ -153,14 +156,15 @@ render() {
       <CardActions>
         <CardActions>
           <Button
-            className={clsx(classes.expand, {
-              [classes.expandOpen]: this.state.expanded,
-            })}
             onClick={this.handleExpandClick}
             aria-expanded={this.state.expanded}
             aria-label="show more"
-            size="small" color="primary" variant="outlined">See Contributions
-                </Button>
+            size="small" color="primary"
+            variant="outlined"
+            endIcon={<ExpandMoreIcon className={clsx(classes.expand, {
+                [classes.expandOpen]: this.state.expanded,
+              })}/>
+            }>See Contributions</Button>
           <Link to={{pathname: "/support-a-business", state:{business: this.props.info}}} style={{ textDecoration: 'none' }}>
             <Button size="small" color="primary" variant="contained">
               Log Support

@@ -121,7 +121,7 @@ class Support extends Component {
         </Grid>
         <Grid container spacing={1} alignItems="center">
           <Grid item xs={12}>
-            <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose this business goal?" fullWidth onChange={this.handleChange}/>
+            <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose to support this business goal?" fullWidth onChange={this.handleChange}/>
           </Grid>
           <Grid item xs={12}>
              <TextField required id="standard-basic" variant="outlined" name="amount" type="number" label="Amount" fullWidth onChange={this.handleChange} InputProps={{

@@ -33,6 +33,9 @@ const useStyles = makeStyles(theme => ({
   alignRight: {
     textAlign: 'right',
     flexGrow: 2
+  },
+  smallText: {
+    fontSize: 10
   }
 }));
 
@@ -41,6 +44,7 @@ export default function MediaControlCard(props) {
   const theme = useTheme();
 
   const createdDate = new Date(props.info.created_at);
+  const name = props.info.anonymous ? "Anonymous" : `${props.info.firstName} ${props.info.lastName}`
 
   return (
     <div className="card-pledge">
@@ -51,11 +55,12 @@ export default function MediaControlCard(props) {
           </Avatar>
         </ListItemAvatar>
         <Grid xs={8} item>
-        <ListItemText primary={`${props.info.firstName} ${props.info.lastName}`} secondary={props.info.description} />
-        </Grid>
+        <ListItemText primary={name} secondary={props.info.description} />
+          <span className={classes.smallText}>{`${createdDate.getMonth()}/${createdDate.getDay()}/${createdDate.getYear()}`}</span>
+
+      </Grid>
       <Grid className={classes.alignRight} item>
         <ListItemText primary={`$${props.info.amount}`} secondary={props.info.type} />
-        <ListItemText secondary={`${createdDate.getMonth()}/${createdDate.getDay()}/${createdDate.getYear()}`}/>
       </Grid>
       </ListItem>
       <Divider variant="inset" component="li" />
