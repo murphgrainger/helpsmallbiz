@@ -16,11 +16,21 @@ router.get('/', async (req,res) => {
 router.post('/add', async (req, res) => {
   try {
     const newBusiness = await Q.addNewGoal(req.body);
-    return res.status(200).json({message:"Successfully added business", status:200});
+    return res.json({message:"Successfully added business", status:200});
   } catch (err) {
     console.log(err);
     return res.status(500).send({error: "Internal Server Error"})
   }
 });
+
+router.get('/:id', async (req, res) => {
+  try {
+    const goalPledges = await Q.getGoalPledges(req.params.id);
+    return res.json({pledges: goalPledges, status:200})
+  }
+  catch (err) {
+    return res.status(500).json({error: "Error retrieving pledges."})
+  }
+})
 
 module.exports = router;

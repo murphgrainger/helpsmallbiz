@@ -43,5 +43,11 @@ module.exports = {
         amountRaised: newTotal
       }).where('id',id)
     })
+  },
+
+  getGoalPledges: function(id) {
+    return knex('pledge')
+      .where('goal_id', id)
+      .select('*')
   }
 };
