@@ -41,7 +41,7 @@ module.exports = {
       const newTotal = parseFloat(amount) + parseFloat(oldAmount.amountRaised);
       return knex('goal').update({
         amountRaised: newTotal
-      })
+      }).where('id',id)
     })
   }
 };

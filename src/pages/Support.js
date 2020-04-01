@@ -84,16 +84,25 @@ class Support extends Component {
       instagram,
       anonymous
     };
-    let response = await fetch(`/support/${this.state.business.id}`, {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'content-type': 'application/json'
-      }
+    try {
+      let response = await fetch(`/pledge/${this.state.business.id}`, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+      let result = await response.json();
+      if (result.status !== 200) throw new Error ()
+      this.props.history.push('/');
+    }
+  catch {
+    this.setState({
+      errMessage: "Oops! Something went wrong.",
+      showError: true
     })
-    let result = await response.json();
-    console.log(result);
   }
+}
 
   render() {
     return (<div className="section Support">

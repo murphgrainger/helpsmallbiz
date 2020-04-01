@@ -92,7 +92,7 @@ export default function CardBusiness(props) {
        </Grid>
        <Grid item xs={3} className={classes.alignRight}>
          <Typography variant="h5" color="textSecondary" component="p">
-           $1000 Raised
+           ${props.info.amountRaised} Raised
          </Typography>
          <Typography variant="body2" color="textSecondary" component="p">
            Goal In Progress
