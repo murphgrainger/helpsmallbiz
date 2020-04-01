@@ -26,6 +26,8 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/Phone';
 import image from '../assets/images/tennyson-st.jpg';
 
+import PledgeCard from './CardHorizontal';
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -52,7 +54,10 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    flexGrow: 2
+    flexGrow: 2,
+  },
+  expandedContent: {
+    background: '#f1f1f1'
   },
   alignRight: {
     textAlign: "right"
@@ -68,37 +73,41 @@ class CardBusiness extends React.Component {
 
     this.state = {
       expanded: false,
-      noPledges: false
+      noPledges: false,
+      pledges: []
     }
   }
 
 
   handleExpandClick = async () => {
     if (!this.state.expanded) {
-
-    try {
-      let response = await fetch(`/goal/${this.props.info.id}`, {
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json'
-        }
-      })
-      let result = await response.json()
-      if (result.status !==200 || !result.pledges.length) throw new Error()
-      console.log(result.pledges);
-      this.setState({
-        expanded: true,
-      })
-    }
-    catch {
-      this.setState({
-        noPledges: true,
-        expanded: true,
-      })
-    }
+      try {
+        let response = await fetch(`/goal/${this.props.info.id}`, {
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
+        let result = await response.json()
+        if (result.status !==200 || !result.pledges.length) throw new Error();
+        let pledgeCards = result.pledges.map((pledge, i) => {
+          return <PledgeCard key={i} info={pledge}/>
+        })
+        console.log(result.pledges);
+        this.setState({
+          expanded: true,
+          pledges: pledgeCards
+        })
+      }
+      catch {
+        this.setState({
+          noPledges: true,
+          expanded: true,
+        })
+      }
   } else {
     this.setState({expanded: !this.state.expanded})
-  }
+    }
   };
 
 render() {
@@ -160,10 +169,11 @@ render() {
         </CardActions>
       </CardActions>
       <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-
-          {this.state.noPledges ? <Typography paragraph>There are currently no pledges towards this goal. Click Log Support above to add one!          </Typography>
- : null }
+        <CardContent className={classes.expandedContent}>
+          {this.state.pledges}
+          {this.state.noPledges ?
+            <Typography paragraph>There are currently no pledges towards this goal. Click Log Support above to add one!</Typography>
+            : null }
         </CardContent>
       </Collapse>
     </Grid>

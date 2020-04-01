@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
+import Navbar from '../components/NavbarSecondary';
 
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -105,7 +106,10 @@ class Support extends Component {
 }
 
   render() {
-    return (<div className="section Support">
+    return (
+      <>
+      <Navbar/>
+      <div className="section Support">
     <Container maxWidth="lg" className="container">
       <div className = "form-wrapper" > <header className="form-header">
       <h1>Log Your Support</h1>
@@ -189,7 +193,7 @@ class Support extends Component {
         </Box>
       </div>
     </form>
-  </div> </Container></div>
+  </div> </Container></div></>
 )
 }
 }

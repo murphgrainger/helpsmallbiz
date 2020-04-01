@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
+import Navbar from '../components/NavbarSecondary';
 
 import Autocomplete from '../components/Autocomplete';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -97,7 +98,10 @@ class AddBusiness extends Component {
 }
 
   render() {
-    return (<div className="section Support">
+    return (
+      <>
+      <Navbar/>
+      <div className="section Support">
     <Container maxWidth="lg" className="container">
       <div className = "form-wrapper" > <header className="form-header">
       <h1>Add a Business</h1>
@@ -168,7 +172,7 @@ class AddBusiness extends Component {
         }
       </div>
     </form>
-  </div> </Container></div>
+  </div> </Container></div></>
 )
 }
 }
