@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Q = require('./db/queries');
+const Q = require('../db/queries');
 
 router.post('/:id', async (req, res) => {
   try {

@@ -66,7 +66,8 @@ class AddBusiness extends Component {
           businessAddress: place.formatted_address,
           businessPhone: place.formatted_phone_number,
           website: place.website,
-          place_id: place.place_id
+          place_id: place.place_id,
+          photoUrl: place.photos[0].getUrl()
         })
       }
     })
@@ -74,8 +75,8 @@ class AddBusiness extends Component {
 
   onSubmit = async (event) => {
     event.preventDefault();
-    const { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website } = this.state;
-    const data = { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website };
+    const { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website, photoUrl } = this.state;
+    const data = { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website, photoUrl };
       try {
         let response = await fetch('/goal/add', {
           method: 'POST',

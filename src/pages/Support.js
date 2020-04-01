@@ -112,7 +112,7 @@ class Support extends Component {
       <div className="section Support">
     <Container maxWidth="lg" className="container">
       <div className = "form-wrapper" > <header className="form-header">
-      <h1>Log Your Support</h1>
+      <h1>Pledge Your Support</h1>
     </header>
     <form className="support-form" autoComplete="off" onSubmit={this.onSubmit}>
       <Grid container spacing={1} alignItems="center">
@@ -188,7 +188,7 @@ class Support extends Component {
         </Grid>
         <Box mt={2}>
           <Grid container spacing={1} alignItems="center" justify="center">
-            <Button className="submit-button" type="submit" variant="contained" color="secondary">Log Support</Button>
+            <Button className="submit-button" type="submit" variant="contained" color="secondary">Pledge Support</Button>
           </Grid>
         </Box>
       </div>

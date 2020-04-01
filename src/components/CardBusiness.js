@@ -120,7 +120,7 @@ render() {
     <Card className={classes.root}>
       <CardMedia
        className={classes.media}
-       image={image}
+       image={this.props.info.photoUrl}
        title={this.props.info.businessName}
      />
    <Grid item xs={9}>
@@ -138,7 +138,7 @@ render() {
        </Grid>
        <Grid item xs={4} className={classes.alignRight}>
          <Typography variant="h5" color="textSecondary" component="p">
-           ${this.props.info.amountRaised} Raised
+           ${this.props.info.amountRaised || 0} Raised
          </Typography>
          <Typography variant="body2" color="textSecondary" component="p">
            Goal In Progress
@@ -167,7 +167,7 @@ render() {
             }>See Contributions</Button>
           <Link to={{pathname: "/support-a-business", state:{business: this.props.info}}} style={{ textDecoration: 'none' }}>
             <Button size="small" color="primary" variant="contained">
-              Log Support
+              Pledge Support
             </Button>
           </Link>
         </CardActions>
@@ -176,7 +176,7 @@ render() {
         <CardContent className={classes.expandedContent}>
           {this.state.pledges}
           {this.state.noPledges ?
-            <Typography paragraph>There are currently no pledges towards this goal. Click Log Support above to add one!</Typography>
+            <Typography paragraph>There are currently no pledges towards this goal. Click Pledge Support above to add one!</Typography>
             : null }
         </CardContent>
       </Collapse>

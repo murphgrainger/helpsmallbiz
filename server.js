@@ -4,8 +4,8 @@ const path = require('path');
 const morgan = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const goal = require('./goal');
-const pledge = require('./pledge');
+const goal = require('./routes/goal');
+const pledge = require('./routes/pledge');
 
 const port = process.env.PORT || 8080;
 

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Q = require('./db/queries');
+const Q = require('../db/queries');
 
 router.get('/', async (req,res) => {
   try {
@@ -9,6 +9,7 @@ router.get('/', async (req,res) => {
     return res.json(all);
   }
   catch (err) {
+    console.log(err);
     return res.status(500).send({error: "Error retreiving businesses."})
   }
 });
@@ -29,6 +30,7 @@ router.get('/:id', async (req, res) => {
     return res.json({pledges: goalPledges, status:200})
   }
   catch (err) {
+    console.log(err);
     return res.status(500).json({error: "Error retrieving pledges."})
   }
 })

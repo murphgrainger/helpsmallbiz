@@ -62,7 +62,7 @@ render() {
               <div className="home-list">
                 <h4 className="noBottom--margin noTop--margin font--yellow">How It Works</h4>
                 <ol>
-                  <li>Choose any business to log your support</li>
+                  <li>Choose any business to pledge your support</li>
                   <li>Pledge the amount you gave</li>
                   <li>Select which way you gave (i.e. Gift Card)</li>
                   <li>Submit your amount</li>
