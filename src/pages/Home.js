@@ -22,7 +22,7 @@ class Home extends Component {
 
    getAllBusinesses = async () => {
     try {
-      let response = await fetch('/business/', {
+      let response = await fetch('/goal', {
         method: 'GET',
         headers: {
           'content-type': 'application/json'

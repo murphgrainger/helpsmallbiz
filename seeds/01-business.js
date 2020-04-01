@@ -1,9 +1,9 @@
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex.raw('DELETE FROM "business"; ALTER SEQUENCE business_id_seq RESTART WITH 1;')
+  return knex.raw('DELETE FROM "goal"; ALTER SEQUENCE goal_id_seq RESTART WITH 1;')
     .then(function () {
       // Inserts seed entries
-      return knex('business').insert([
+      return knex('goal').insert([
         {id: 1,
           created_at: new Date(),
           firstName: "Murph",
@@ -16,7 +16,8 @@ exports.seed = function(knex) {
           businessPhone: "303-399-3939",
           website: "https://cask-and-craft.com",
           place_id: "fdjkalf;djsakfl;ja;kldfjasl;f",
-          instagram:"caskandcraft"
+          instagram:"caskandcraft",
+          amountRaised: 0
         },
         {id: 2,
           created_at: new Date(),
@@ -30,7 +31,8 @@ exports.seed = function(knex) {
           businessPhone: "303-399-3939",
           website: "https://cask-and-craft.com",
           place_id: "fdjkalf;djsakfl;ja;kldfjasl;f",
-          instagram:"caskandcraft"
+          instagram:"caskandcraft",
+          amountRaised: 100.00
         }
       ]);
     });

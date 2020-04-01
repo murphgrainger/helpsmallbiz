@@ -1,8 +1,8 @@
 const knex = require('./knex');
 
 module.exports = {
-  addNewBusiness: function(b) {
-    return knex('business').insert({
+  addNewGoal: function(b) {
+    return knex('goal').insert({
       firstName: b.firstName,
       lastName: b.lastName,
       email: b.email,
@@ -17,7 +17,31 @@ module.exports = {
     })
   },
 
-  getAllBusinesses: function() {
-    return knex('business').select('*');
+  getAllGoals: function() {
+    return knex('goal').select('*');
+  },
+
+  addSupport: function(id, data) {
+    return knex('pledge').insert({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      description: data.description,
+      amount: Number(data.amount),
+      type: data.type,
+      instagram: data.instagram,
+      anonymous: data.anonymous,
+      goal_id: id
+    })
+  },
+
+  updateGoalAmount: function(id, amount) {
+    return knex('goal').select('amountRaised').where('id',id).first()
+    .then(oldAmount => {
+      const newTotal = parseFloat(amount) + parseFloat(oldAmount.amountRaised);
+      return knex('goal').update({
+        amountRaised: newTotal
+      })
+    })
   }
 };

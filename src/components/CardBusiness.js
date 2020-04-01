@@ -118,7 +118,7 @@ export default function CardBusiness(props) {
             aria-label="show more"
             size="small" color="primary" variant="outlined">See Contributions
                 </Button>
-          <Link to={{pathname: "/support-a-business", state:{business: props.info}}}>
+          <Link to={{pathname: "/support-a-business", state:{business: props.info}}} style={{ textDecoration: 'none' }}>
             <Button size="small" color="primary" variant="contained">
               Log Support
             </Button>

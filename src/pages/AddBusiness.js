@@ -76,7 +76,7 @@ class AddBusiness extends Component {
     const { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website } = this.state;
     const data = { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website };
       try {
-        let response = await fetch('/business/add', {
+        let response = await fetch('/goal/add', {
           method: 'POST',
           body: JSON.stringify(data),
           headers: {

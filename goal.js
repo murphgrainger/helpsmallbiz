@@ -5,7 +5,7 @@ const Q = require('./db/queries');
 
 router.get('/', async (req,res) => {
   try {
-    const all = await Q.getAllBusinesses();
+    const all = await Q.getAllGoals();
     return res.json(all);
   }
   catch (err) {
@@ -15,7 +15,7 @@ router.get('/', async (req,res) => {
 
 router.post('/add', async (req, res) => {
   try {
-    const newBusiness = await Q.addNewBusiness(req.body);
+    const newBusiness = await Q.addNewGoal(req.body);
     return res.status(200).json({message:"Successfully added business", status:200});
   } catch (err) {
     console.log(err);

@@ -18,6 +18,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Container from '@material-ui/core/Container';
+import Switch from '@material-ui/core/Switch';
 
 import CardContact from '../components/CardContact';
 
@@ -30,56 +31,35 @@ class Support extends Component {
     super(props);
 
     this.state = {
+      business: {},
       firstName: "",
       lastName: "",
       email: "",
+      instragram: "",
       description: "",
-      terms: false,
-      businessName: "",
-      business: {}
+      amount: "",
+      type: "",
+      anonymous: false,
+      terms: false
     }
   }
 
   componentDidMount() {
     if (this.props.location.state && this.props.location.state.business) {
           const {business} = this.props.location.state;
-          this.setState({business: business, businessName: business.businessName})
+          this.setState({business: business})
       } else {
         this.props.history.push('/')
       }
     }
 
   handleChange = (event) => {
-    const value = event.target.name === 'terms'
-      ? !this.state.terms
+    const value = event.target.name === 'terms' || event.target.name === 'anonymous'
+      ? !this.state[event.target.name]
       : event.target.value;
     this.setState({
       [event.target.name]: value
     });
-  };
-
-  setLocationValue = (value) => {
-    console.log(value.place_id);
-    this.getPlaceDetails(value.place_id)
-  }
-
-  async getPlaceDetails(id) {
-    let service = new window.google.maps.places.PlacesService(document.createElement('div'));
-
-    await service.getDetails({
-      placeId: id
-    }, (place, status) => {
-      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-        this.setState({
-          placeSelected: true,
-          businessName: place.name,
-          businessAddress: place.formatted_address,
-          businessPhone: place.formatted_phone_number,
-          businessWebsite: place.website,
-          place_id: place.place_id
-        })
-      }
-    })
   };
 
   onSubmit = async (event) => {
@@ -89,22 +69,22 @@ class Support extends Component {
       lastName,
       email,
       description,
-      challenge,
-      businessName,
-      place_id,
-      instagram
+      amount,
+      type,
+      instagram,
+      anonymous
     } = this.state;
     const data = {
       firstName,
       lastName,
       email,
       description,
-      challenge,
-      businessName,
-      place_id,
-      instagram
+      amount,
+      type,
+      instagram,
+      anonymous
     };
-    let response = await fetch('/add-business', {
+    let response = await fetch(`/support/${this.state.business.id}`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
@@ -131,7 +111,7 @@ class Support extends Component {
             <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose this business goal?" fullWidth onChange={this.handleChange}/>
           </Grid>
           <Grid item xs={12}>
-             <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="amount" label="Amount" fullWidth onChange={this.handleChange} InputProps={{
+             <TextField required id="standard-basic" variant="outlined" name="amount" type="number" label="Amount" fullWidth onChange={this.handleChange} InputProps={{
                 startAdornment: (<InputAdornment position="start">
                   <AttachMoneyIcon/>
                 </InputAdornment>)
@@ -140,11 +120,11 @@ class Support extends Component {
           <FormLabel component="legend" className="radio-label">Log How You Supported this Goal</FormLabel>
           <Grid container spacing={1} alignItems="center">
           <FormControl component="fieldset">
-            <RadioGroup aria-label="gender" name="gender1" value={this.state.radio} onChange={this.handleChange}>
-              <FormControlLabel value="female" control={<Radio />} label="Gift Card" />
-              <FormControlLabel value="male" control={<Radio />} label="Cash Donation" />
-              <FormControlLabel value="other" control={<Radio />} label="Online Order / Delivery / Takeout" />
-              <FormControlLabel value="disabled"  control={<Radio />} label="Other" />
+            <RadioGroup aria-label="gender" name="type" value={this.state.radio} onChange={this.handleChange}>
+              <FormControlLabel value="Gift Card" control={<Radio />} label="Gift Card" />
+              <FormControlLabel value="Cash Donation" control={<Radio />} label="Cash Donation" />
+              <FormControlLabel value="Remote Order" control={<Radio />} label="Online Order / Delivery / Takeout" />
+              <FormControlLabel value="Other"  control={<Radio />} label="Other" />
             </RadioGroup>
           </FormControl>
         </Grid>
@@ -177,10 +157,14 @@ class Support extends Component {
                 </InputAdornment>)
               }}/>
           </Grid>
+          <FormControlLabel
+            control={<Switch checked={this.state.anonymous} onChange={this.handleChange} name="anonymous" />}
+            label="Make my pledge anonymous."
+          />
         </Grid>
       </Grid>
       <div className="form-footer">
-        <Grid container spacing={1} alignItems="center" justify="center">
+        <Grid container spacing={1}>
           <FormControlLabel control={<Checkbox required checked = {
               this.state.terms
             }
@@ -191,7 +175,7 @@ class Support extends Component {
         </Grid>
         <Box mt={2}>
           <Grid container spacing={1} alignItems="center" justify="center">
-            <Button className="submit-button" type="submit" variant="contained" color="secondary">Add Business</Button>
+            <Button className="submit-button" type="submit" variant="contained" color="secondary">Log Support</Button>
           </Grid>
         </Box>
       </div>
