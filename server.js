@@ -4,7 +4,8 @@ const path = require('path');
 const morgan = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const business = require('./business');
+const goal = require('./routes/goal');
+const pledge = require('./routes/pledge');
 
 const port = process.env.PORT || 8080;
 
@@ -20,7 +21,8 @@ app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
 
 
-app.use('/business', business);
+app.use('/goal', goal);
+app.use('/pledge', pledge);
 
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html')); //serving build folder
