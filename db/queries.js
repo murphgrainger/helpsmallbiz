@@ -14,7 +14,8 @@ module.exports = {
       businessAddress: b.businessAddress,
       businessPhone: b.businessPhone,
       website: b.website,
-      photoUrl: b.photoUrl
+      photoUrl: b.photoUrl,
+      amountRaised: 0
     })
   },
 

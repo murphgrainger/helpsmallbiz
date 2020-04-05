@@ -13,7 +13,7 @@ function NavbarSecondary(props) {
     <AppBar position="static" color="secondary" >
       <Grid container alignItems="flex-start" justify="flex-start">
         <Box mr={1}>
-          <Button color="primary" variant="outlined" href="/">Back to Home</Button>
+          <Button color="primary" variant="contained" href="/">Back to Home</Button>
         </Box>
       </Grid>
     </AppBar>

@@ -171,7 +171,7 @@ render() {
         <CardActions className={classes.spaceBetween}>
           <Link to={{pathname: "/support-a-business", state:{business: this.props.info}}} style={{ textDecoration: 'none' }}>
             <Button size="small" color="primary" variant="contained">
-              Pledge Support
+              Log Support
             </Button>
           </Link>
           <IconButton
