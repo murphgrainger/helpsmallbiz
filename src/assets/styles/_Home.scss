@@ -12,9 +12,23 @@
 
 }
 
-.home-list {
-  padding: 0 2em;
-  max-width: 400px;
+.home-howto {
+  h5 {
+    margin-bottom: 0;
+  }
+}
+
+.list-icon {
+  border-radius: 50%;
+  width: 50px;
+  font-size: 23px;
+  border: 1px solid $color-red;
+  color: $color-red;
+  padding: 4px 12px;
+}
+
+.secondary-subheader {
+  margin: $pad-half;
 }
 
 .goal-bar {

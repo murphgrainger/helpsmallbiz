@@ -28,6 +28,9 @@ import image from '../assets/images/tennyson-st.jpg';
 
 import PledgeCard from './CardHorizontal';
 
+import { GOOGLE_API_KEY } from '../constants';
+
+
 const styles = theme => ({
   root: {
     width: '100%',
@@ -36,7 +39,7 @@ const styles = theme => ({
     flexDirection: 'row'
   },
   header: {
-    background: "#f1eebf",
+    background: "#e6e6e6",
     padding: 16
   },
   media: {
@@ -76,9 +79,14 @@ class CardBusiness extends React.Component {
 
     this.state = {
       expanded: false,
+      photoUrl: "",
       noPledges: false,
       pledges: []
     }
+  }
+
+  componentDidMount() {
+      this.getPlaceDetails(this.props.info);
   }
 
 
@@ -96,7 +104,6 @@ class CardBusiness extends React.Component {
         let pledgeCards = result.pledges.map((pledge, i) => {
           return <PledgeCard key={i} info={pledge}/>
         })
-        console.log(result.pledges);
         this.setState({
           expanded: true,
           pledges: pledgeCards
@@ -113,6 +120,19 @@ class CardBusiness extends React.Component {
     }
   };
 
+  getPlaceDetails = async (biz) => {
+    let service = new window.google.maps.places.PlacesService(document.createElement('div'));
+    await service.getDetails({
+      placeId: biz.place_id
+    }, (place, status) => {
+      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        this.setState({
+          photoUrl:place.photos[0].getUrl()
+        })
+      }
+    })
+  };
+
 render() {
   const { classes } = this.props;
 
@@ -120,7 +140,7 @@ render() {
     <Card className={classes.root}>
       <CardMedia
        className={classes.media}
-       image={this.props.info.photoUrl}
+       image={this.state.photoUrl}
        title={this.props.info.businessName}
      />
    <Grid item xs={9}>

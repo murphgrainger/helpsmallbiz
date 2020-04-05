@@ -5,11 +5,16 @@ export const THEME = {
     palette: {
     primary:
       {
-        main: '#002668'
+        main: '#1B5460'
       },
     secondary:
       {
-        main: '#DBD56E'
+        main: '#A6A6A6',
+        light: 'CA3739'
+      },
+    info:
+      {
+        main: '#A6A6A6'
       }
   },
   typography: {
