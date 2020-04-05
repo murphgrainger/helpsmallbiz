@@ -18,6 +18,4 @@ ReactDOM.render(<BrowserRouter>
   </MuiThemeProvider>
 </BrowserRouter>, document.getElementById('root'))
 
-process.env.NODE_ENV === 'development'
-  ? serviceWorker.unregister()
-  : serviceWorker.register()
+serviceWorker.unregister();
