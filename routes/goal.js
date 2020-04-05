@@ -5,8 +5,15 @@ const Q = require('../db/queries');
 
 router.get('/', async (req,res) => {
   try {
-    const all = await Q.getAllGoals();
-    return res.json(all);
+    let goalsAndPledges = [];
+    const allGoals = await Q.getAllGoals();
+
+    for (goal of allGoals) {
+      const response = await Q.getGoalPledges(goal.id);
+      goal.pledges = response;
+      goalsAndPledges.push(goal);
+    }
+      return res.json(goalsAndPledges);
   }
   catch (err) {
     console.log(err);

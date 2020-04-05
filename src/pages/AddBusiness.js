@@ -54,7 +54,7 @@ class AddBusiness extends Component {
   }
 
   async getPlaceDetails(id) {
-    let service = new window.google.maps.places.PlacesService(document.createElement('div'));
+    let service = window && window.google ? new window.google.maps.places.PlacesService(document.createElement('div')): "";
 
     await service.getDetails({
       placeId: id

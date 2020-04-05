@@ -36,7 +36,8 @@ const styles = theme => ({
     width: '100%',
     margin: 12,
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    textAlign: 'left'
   },
   header: {
     background: "#e6e6e6",
@@ -45,6 +46,16 @@ const styles = theme => ({
   media: {
     flexGrow: 1,
     height: '100%', // 16:9
+    position: 'relative'
+  },
+  overlay: {
+    position: 'absolute',
+    width: '100%',
+    background: 'rgba(15,53,66,.6)',
+    color: 'white'
+  },
+  wrapper: {
+    padding: '1em'
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -70,6 +81,12 @@ const styles = theme => ({
   },
   alignLeft: {
     textAlign: "left"
+  },
+  whiteIcon: {
+    color: "white"
+  },
+  spaceBetween: {
+    justifyContent: "space-between"
   }
 });
 
@@ -78,7 +95,7 @@ class CardBusiness extends React.Component {
     super(props);
 
     this.state = {
-      expanded: false,
+      expanded: true,
       photoUrl: "",
       noPledges: false,
       pledges: []
@@ -139,59 +156,63 @@ render() {
   return (
     <Card className={classes.root}>
       <CardMedia
-       className={classes.media}
-       image={this.state.photoUrl}
-       title={this.props.info.businessName}
-     />
+        className={classes.media}
+        image={this.state.photoUrl}
+        title={this.props.info.businessName}>
+       <div className={classes.overlay}>
+         <div className={classes.wrapper}>
+           <Typography variant="h5" component="h2">
+              {this.props.info.businessName}
+                </Typography>
+                <div><a href={`https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${this.props.info.place_id}`} target="_blank"><IconButton size="small"><LocationOnIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
+                <a href={`tel:${this.props.info.businessPhone}`}><IconButton size="small"><PhoneIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
+                <a href={this.props.info.website} target="_blank"><IconButton size="small"><LanguageIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
+            </div>
+          </div>
+       </div>
+       </CardMedia>
+
    <Grid item xs={9}>
      <Grid container spacing={1} justify="space-between" className={classes.header}>
-       <Grid item xs={8} className={classes.alignLeft}>
-         <Typography variant="h5" component="h2">
-            {this.props.info.businessName}
-            <a href={`https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${this.props.info.place_id}`} target="_blank"><IconButton size="small"><LocationOnIcon fontSize="small"/></IconButton></a>
-            <a href={`tel:${this.props.info.businessPhone}`}><IconButton size="small"><PhoneIcon fontSize="small"/></IconButton></a>
-            <a href={this.props.info.website} target="_blank"><IconButton size="small"><LanguageIcon fontSize="small"/></IconButton></a>
+       <Grid item xs={10} className={classes.alignLeft}>
+          <Typography variant="h6" className="text-red" component="p">
+            <StarIcon fontSize="small" className="text-red"/> {this.props.info.challenge}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {this.props.info.description}
+            <PersonIcon/>{` ${this.props.info.firstName} ${this.props.info.lastName}`}
           </Typography>
        </Grid>
-       <Grid item xs={4} className={classes.alignRight}>
+       <Grid item xs={2} className={classes.alignRight}>
          <Typography variant="h5" color="textSecondary" component="p">
-           ${this.props.info.amountRaised || 0} Raised
+           ${this.props.info.amountRaised || 0}
          </Typography>
          <Typography variant="body2" color="textSecondary" component="p">
-           Goal In Progress
+           Raised
          </Typography>
        </Grid>
      </Grid>
    <CardContent className={classes.cardContent}>
      <Typography variant="body2" color="textSecondary" component="p">
-       <PersonIcon/>{`${this.props.info.firstName} ${this.props.info.lastName}`}
+       <strong>The Why: </strong>{this.props.info.description}
      </Typography>
-        <Typography variant="h6" color="textSecondary" component="p">
-          <StarIcon fontSize="small"/>{this.props.info.challenge}
-        </Typography>
       </CardContent>
-      <CardActions>
-        <CardActions>
-          <Button
-            onClick={this.handleExpandClick}
-            aria-expanded={this.state.expanded}
-            aria-label="show more"
-            size="small" color="primary"
-            variant="outlined"
-            endIcon={<ExpandMoreIcon className={clsx(classes.expand, {
-                [classes.expandOpen]: this.state.expanded,
-              })}/>
-            }>See Contributions</Button>
+        <CardActions className={classes.spaceBetween}>
           <Link to={{pathname: "/support-a-business", state:{business: this.props.info}}} style={{ textDecoration: 'none' }}>
             <Button size="small" color="primary" variant="contained">
               Pledge Support
             </Button>
           </Link>
+          <IconButton
+              className={clsx(classes.expand, {
+                [classes.expandOpen]: this.state.expanded,
+              })}
+              onClick={this.handleExpandClick}
+              aria-expanded={this.state.expanded}
+              aria-label="show more"
+            >
+              <ExpandMoreIcon />
+            </IconButton>
         </CardActions>
-      </CardActions>
       <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
         <CardContent className={classes.expandedContent}>
           {this.state.pledges}

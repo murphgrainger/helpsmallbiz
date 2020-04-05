@@ -19,7 +19,8 @@ module.exports = {
   },
 
   getAllGoals: function() {
-    return knex('goal').select('*');
+    return knex('goal')
+    .select('*')
   },
 
   addSupport: function(id, data) {
@@ -48,7 +49,7 @@ module.exports = {
 
   getGoalPledges: function(id) {
     return knex('pledge')
-      .where('goal_id', id)
       .select('*')
+      .where('goal_id', id)
   }
 };

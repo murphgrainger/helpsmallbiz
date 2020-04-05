@@ -34,6 +34,7 @@ class Home extends Component {
         }
       })
       let result = await response.json();
+      console.log('result', result);
       let cards = result.map((biz,i) => {
         return (
           <CardBusiness key={i} info={biz}/>
