@@ -13,9 +13,9 @@ function Navbar(props) {
     <AppBar position="static" color="secondary" >
       <Grid container alignItems="flex-end" justify="flex-end">
         <Box mr={1}>
-          <Button color="primary" variant="outlined" href="#goals">Support a Goal</Button>
+          <Button color="info" variant="contained" href="/add-a-business">Add a Challenge</Button>
         </Box>
-        <Button color="primary" variant="outlined" href="/add-a-business">Add a Goal</Button>
+        <Button color="primary" variant="contained" href="#goals">Log Support</Button>
       </Grid>
     </AppBar>
   )

@@ -1,11 +1,14 @@
 .main-navigation {
+  & {
+    background: $color-grey;
+  }
 
   ul {
     list-style: none;
   }
 
   a {
-    background: $color-yellow;
+    background: $color-grey;
     padding: $pad;
   }
 }

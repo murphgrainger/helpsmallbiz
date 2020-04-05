@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
   color: black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -8,19 +8,26 @@ body {
 
 
 h1 {
-  font-size: 36px;
+  font-size: 70px;
 }
 
 h2 {
   font-size: 28px;
+  text-transform: uppercase;
 }
 
 h3 {
   font-size: 22px;
+  font-weight: 400;
 }
 
 h4 {
   font-size: 18px;
+}
+
+h5 {
+  font-size: 18px;
+  text-transform: uppercase;
 }
 
 p {
@@ -29,6 +36,10 @@ p {
 
 ul,ol {
   text-align: left;
+}
+
+.font-secondary {
+  font-family: 'Lato', sans-serif;
 }
 
 .font--yellow {
@@ -47,13 +58,34 @@ main {
   width: 100%;
 }
 
+.text-white {
+  color: white;
+}
+
+.text-green {
+  color: $color-green;
+}
+
+.text-red {
+  color: $color-red;
+}
+
 .section {
-  background: linear-gradient(164deg, rgba(2,0,36,.9) 0%, rgba(0,38,104,.9) 75%, rgba(50,103,113,.8) 100%);
+  background: $color-green;
   width: 100%;
   padding: $pad-triple 0;
 
+  &.-red {
+    background: $color-red;
+  }
   &.-grey {
     background: $color-grey;
+  }
+  &.-white {
+    background: white;
+  }
+  &.-thin {
+    padding: $pad 0;
   }
 }
 

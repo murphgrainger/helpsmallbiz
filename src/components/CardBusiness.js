@@ -96,7 +96,6 @@ class CardBusiness extends React.Component {
         let pledgeCards = result.pledges.map((pledge, i) => {
           return <PledgeCard key={i} info={pledge}/>
         })
-        console.log(result.pledges);
         this.setState({
           expanded: true,
           pledges: pledgeCards
