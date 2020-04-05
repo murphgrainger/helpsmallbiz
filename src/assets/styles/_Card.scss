@@ -4,4 +4,21 @@
 
 .card-pledge {
   list-style: none;
+  padding: 0!important;
+
+  &:last-child {
+    .MuiDivider-root {
+      display: none;
+    }
+  }
+}
+
+.card-media {
+    flex-grow: 1;
+    position: relative;
+
+  @media (max-width: 960px) {
+    height: 90px;
+    width: 100%;
+  }
 }

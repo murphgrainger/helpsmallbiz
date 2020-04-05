@@ -15,7 +15,7 @@ function Navbar(props) {
         <Box mr={1}>
           <Button color="secondary" variant="contained" href="/add-a-business">Add a Challenge</Button>
         </Box>
-        <Button color="primary" variant="contained" href="#goals">Log Support</Button>
+        <Button color="primary" variant="contained" href="#challenges">Log Support</Button>
       </Grid>
     </AppBar>
   )

@@ -14,12 +14,14 @@ module.exports = {
       businessAddress: b.businessAddress,
       businessPhone: b.businessPhone,
       website: b.website,
-      photoUrl: b.photoUrl
+      photoUrl: b.photoUrl,
+      amountRaised: 0
     })
   },
 
   getAllGoals: function() {
-    return knex('goal').select('*');
+    return knex('goal')
+    .select('*')
   },
 
   addSupport: function(id, data) {
@@ -48,7 +50,7 @@ module.exports = {
 
   getGoalPledges: function(id) {
     return knex('pledge')
-      .where('goal_id', id)
       .select('*')
+      .where('goal_id', id)
   }
 };
