@@ -13,7 +13,8 @@ module.exports = {
       instagram: b.instagram,
       businessAddress: b.businessAddress,
       businessPhone: b.businessPhone,
-      website: b.website
+      website: b.website,
+      photoUrl: b.photoUrl
     })
   },
 

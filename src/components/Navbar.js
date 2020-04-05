@@ -10,10 +10,10 @@ import Box from '@material-ui/core/Box';
 
 function Navbar(props) {
   return (
-    <AppBar position="static" color="secondary" >
+    <AppBar position="static" className="Navbar" >
       <Grid container alignItems="flex-end" justify="flex-end">
         <Box mr={1}>
-          <Button color="info" variant="contained" href="/add-a-business">Add a Challenge</Button>
+          <Button color="secondary" variant="contained" href="/add-a-business">Add a Challenge</Button>
         </Box>
         <Button color="primary" variant="contained" href="#goals">Log Support</Button>
       </Grid>

@@ -105,7 +105,7 @@ class AddBusiness extends Component {
       <div className="section Support">
     <Container maxWidth="lg" className="container">
       <div className = "form-wrapper" > <header className="form-header">
-      <h1>Add a Business</h1>
+      <h2>Add a Challenge</h2>
     </header>
     <form className="support-form" autoComplete="off" onSubmit={this.onSubmit}>
       <Grid container spacing={1} alignItems="center">
@@ -163,7 +163,7 @@ class AddBusiness extends Component {
         </Grid>
         <Box mt={2}>
           <Grid container spacing={1} alignItems="center" justify="center">
-            <Button className="submit-button" type="submit" variant="contained" color="secondary">Add Business</Button>
+            <Button className="submit-button" type="submit" variant="contained" color="primary">Add Business</Button>
           </Grid>
         </Box>
         {this.state.showError &&

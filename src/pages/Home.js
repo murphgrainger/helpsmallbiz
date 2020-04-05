@@ -126,7 +126,7 @@ render() {
   </div>
   <div className="section -grey">
   <Container maxWidth="lg" className="">
-    <h2>Current Goals</h2>
+    <h2>Current Challenges</h2>
     <Grid container item xs={12} className="goal-bar" justify="center" id="goals">
       {this.state.cards}
     </Grid>
