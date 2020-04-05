@@ -108,33 +108,7 @@ class CardBusiness extends React.Component {
 
 
   handleExpandClick = async () => {
-    if (!this.state.expanded) {
-      try {
-        let response = await fetch(`/goal/${this.props.info.id}`, {
-          method: 'GET',
-          headers: {
-            'content-type': 'application/json'
-          }
-        })
-        let result = await response.json()
-        if (result.status !==200 || !result.pledges.length) throw new Error();
-        let pledgeCards = result.pledges.map((pledge, i) => {
-          return <PledgeCard key={i} info={pledge}/>
-        })
-        this.setState({
-          expanded: true,
-          pledges: pledgeCards
-        })
-      }
-      catch {
-        this.setState({
-          noPledges: true,
-          expanded: true,
-        })
-      }
-  } else {
     this.setState({expanded: !this.state.expanded})
-    }
   };
 
   getPlaceDetails = async (biz) => {
@@ -152,7 +126,9 @@ class CardBusiness extends React.Component {
 
 render() {
   const { classes } = this.props;
-
+  const pledges = this.props.info.pledges.map((pledge, i) => {
+    return (<PledgeCard key={i} info={pledge}/>)
+  })
   return (
     <Card className={classes.root}>
       <CardMedia
@@ -215,10 +191,7 @@ render() {
         </CardActions>
       <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
         <CardContent className={classes.expandedContent}>
-          {this.state.pledges}
-          {this.state.noPledges ?
-            <Typography paragraph>There are currently no pledges towards this goal. Click Pledge Support above to add one!</Typography>
-            : null }
+          { pledges }
         </CardContent>
       </Collapse>
     </Grid>
