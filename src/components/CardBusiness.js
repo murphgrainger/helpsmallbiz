@@ -37,16 +37,12 @@ const styles = theme => ({
     margin: 12,
     display: 'flex',
     flexDirection: 'row',
-    textAlign: 'left'
+    textAlign: 'left',
+    flexWrap: 'wrap'
   },
   header: {
     background: "#e6e6e6",
     padding: 16
-  },
-  media: {
-    flexGrow: 1,
-    height: '100%', // 16:9
-    position: 'relative'
   },
   overlay: {
     position: 'absolute',
@@ -132,7 +128,7 @@ render() {
   return (
     <Card className={classes.root}>
       <CardMedia
-        className={classes.media}
+        className='card-media'
         image={this.state.photoUrl}
         title={this.props.info.businessName}>
        <div className={classes.overlay}>
@@ -148,9 +144,9 @@ render() {
        </div>
        </CardMedia>
 
-   <Grid item xs={9}>
+   <Grid item md={9}>
      <Grid container spacing={1} justify="space-between" className={classes.header}>
-       <Grid item xs={10} className={classes.alignLeft}>
+       <Grid item md={10} className={classes.alignLeft}>
           <Typography variant="h6" className="text-red" component="p">
             <StarIcon fontSize="small" className="text-red"/> {this.props.info.challenge}
           </Typography>
@@ -158,7 +154,7 @@ render() {
             <PersonIcon/>{` ${this.props.info.firstName} ${this.props.info.lastName}`}
           </Typography>
        </Grid>
-       <Grid item xs={2} className={classes.alignRight}>
+       <Grid item md={2} className={classes.alignRight}>
          <Typography variant="h5" color="textSecondary" component="p">
            ${this.props.info.amountRaised || 0}
          </Typography>
