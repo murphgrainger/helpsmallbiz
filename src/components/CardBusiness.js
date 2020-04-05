@@ -190,9 +190,9 @@ render() {
             </IconButton>
         </CardActions>
       <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-        <CardContent className={classes.expandedContent}>
+        <div className={classes.expandedContent}>
           { pledges }
-        </CardContent>
+        </div>
       </Collapse>
     </Grid>
     </Card>

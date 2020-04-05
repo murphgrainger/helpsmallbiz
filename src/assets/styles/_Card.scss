@@ -4,4 +4,11 @@
 
 .card-pledge {
   list-style: none;
+  padding: 0!important;
+
+  &:last-child {
+    .MuiDivider-root {
+      display: none;
+    }
+  }
 }

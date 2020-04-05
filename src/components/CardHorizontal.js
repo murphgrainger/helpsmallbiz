@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Avatar from '@material-ui/core/Avatar';
 import ImageIcon from '@material-ui/icons/Image';
 import Divider from '@material-ui/core/Divider';
@@ -18,7 +18,7 @@ import PersonIcon from '@material-ui/icons/Person';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex'
+    display: 'flex',
   },
   details: {
     display: 'flex',
@@ -47,23 +47,22 @@ export default function MediaControlCard(props) {
   const name = props.info.anonymous ? "Anonymous" : `${props.info.firstName} ${props.info.lastName}`
 
   return (
-    <div className="card-pledge">
-    <ListItem>
-        <ListItemAvatar>
+    <List className="card-pledge">
+      <ListItem>
+        <ListItemIcon>
           <Avatar>
             <PersonIcon />
           </Avatar>
-        </ListItemAvatar>
+        </ListItemIcon>
         <Grid xs={8} item>
-        <ListItemText primary={name} secondary={props.info.description} />
+          <ListItemText primary={name} secondary={props.info.description} />
           <span className={classes.smallText}>{`${createdDate.getMonth()}/${createdDate.getDay()}/${createdDate.getYear()}`}</span>
-
-      </Grid>
-      <Grid className={classes.alignRight} item>
-        <ListItemText primary={`$${props.info.amount}`} secondary={props.info.type} />
-      </Grid>
+        </Grid>
+        <Grid className={classes.alignRight} item>
+          <ListItemText primary={`$${props.info.amount}`} secondary={props.info.type} />
+        </Grid>
       </ListItem>
       <Divider variant="inset" component="li" />
-      </div>
+      </List>
   );
 }
