@@ -112,7 +112,7 @@ class Support extends Component {
       <div className="section Support">
     <Container maxWidth="lg" className="container">
       <div className = "form-wrapper" > <header className="form-header">
-      <h1>Pledge Your Support</h1>
+      <h2>Pledge Your Support</h2>
     </header>
     <form className="support-form" autoComplete="off" onSubmit={this.onSubmit}>
       <Grid container spacing={1} alignItems="center">

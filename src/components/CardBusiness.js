@@ -39,7 +39,7 @@ const styles = theme => ({
     flexDirection: 'row'
   },
   header: {
-    background: "#f1eebf",
+    background: "#e6e6e6",
     padding: 16
   },
   media: {
@@ -79,7 +79,7 @@ class CardBusiness extends React.Component {
 
     this.state = {
       expanded: false,
-      photoUrl: props.info.photoUrl,
+      photoUrl: "",
       noPledges: false,
       pledges: []
     }

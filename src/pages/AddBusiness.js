@@ -67,7 +67,7 @@ class AddBusiness extends Component {
           businessPhone: place.formatted_phone_number,
           website: place.website,
           place_id: place.place_id,
-          photoUrl: place.photos[0].getUrl()
+          photoUrl: ""
         })
       }
     })
