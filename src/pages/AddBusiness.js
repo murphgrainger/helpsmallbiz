@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
+import Container from '@material-ui/core/Container';
+import Navbar from '../components/NavbarSecondary';
 
 import Autocomplete from '../components/Autocomplete';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -52,7 +54,7 @@ class AddBusiness extends Component {
   }
 
   async getPlaceDetails(id) {
-    let service = new window.google.maps.places.PlacesService(document.createElement('div'));
+    let service = window && window.google ? new window.google.maps.places.PlacesService(document.createElement('div')): "";
 
     await service.getDetails({
       placeId: id
@@ -64,7 +66,8 @@ class AddBusiness extends Component {
           businessAddress: place.formatted_address,
           businessPhone: place.formatted_phone_number,
           website: place.website,
-          place_id: place.place_id
+          place_id: place.place_id,
+          photoUrl: ""
         })
       }
     })
@@ -72,10 +75,10 @@ class AddBusiness extends Component {
 
   onSubmit = async (event) => {
     event.preventDefault();
-    const { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website } = this.state;
-    const data = { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website };
+    const { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website, photoUrl } = this.state;
+    const data = { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website, photoUrl };
       try {
-        let response = await fetch('/business/add', {
+        let response = await fetch('/goal/add', {
           method: 'POST',
           body: JSON.stringify(data),
           headers: {
@@ -96,15 +99,19 @@ class AddBusiness extends Component {
 }
 
   render() {
-    return (<> < div className = "form-wrapper" > <header className="form-header">
-      <h1>Add a Business</h1>
+    return (
+      <>
+      <Navbar/>
+      <div className="section Support">
+    <Container maxWidth="lg" className="container">
+      <div className = "form-wrapper" > <header className="form-header">
+      <h2>Add a Challenge</h2>
     </header>
     <form className="support-form" autoComplete="off" onSubmit={this.onSubmit}>
       <Grid container spacing={1} alignItems="center">
         <Grid item xs={12}>
           <Autocomplete setValue={this.setLocationValue}/>
         </Grid>
-        <Grid container spacing={1} alignItems="center">
           <Grid item xs={12}>
             <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose this business?" fullWidth onChange={this.handleChange}/>
           </Grid>
@@ -112,37 +119,27 @@ class AddBusiness extends Component {
             <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="challenge" label="Your Challenge" fullWidth onChange={this.handleChange}/>
           </Grid>
         </Grid>
-        <p>Your Information &nbsp;</p>
-        <Tooltip title="Your name will be displayed publicly attached to this business. Your instagram handle will also appear if you share it.  Your email will solely be used for internal communication from the administrator." aria-label="add" placement="right-start">
-          <InfoIcon color="primary" fontSize="small"/>
-        </Tooltip>
-
+        <Grid container spacing={1} alignItems="center">
+            <p style={{'margin':0}}>Your Information <Tooltip title="Your name will be displayed publicly attached to this business. Your email will not be displayed or distributed." aria-label="add" placement="right-start">
+              <InfoIcon color="primary" fontSize="small"/>
+              </Tooltip>
+            </p>
+        </Grid>
         <Grid container spacing={1} alignItems="center">
           <Grid item xs={6}>
             <TextField required id="standard-basic" variant="outlined" label="First Name" name="firstName" fullWidth onChange={this.handleChange}/>
           </Grid>
           <Grid item xs={6}>
-            <TextField required id="standard-basic" variant="outlined" label="Last Name" name="lastName" fullWidth onChange={this.handleChange}/>
+            <TextField id="standard-basic" variant="outlined" label="Last Name" name="lastName" fullWidth onChange={this.handleChange}/>
           </Grid>
-        </Grid>
-        <Grid container spacing={1} alignItems="center">
-
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <TextField required id="standard-basic" variant="outlined" type="email" label="Email" name="email" placeholder="for internal use only" fullWidth onChange={this.handleChange} InputProps={{
                 startAdornment: (<InputAdornment position="start">
                   <MailOutlineSharpIcon/>
                 </InputAdornment>)
               }}/>
           </Grid>
-          <Grid item xs={6}>
-            <TextField id="standard-basic" variant="outlined" label="Instagram Handle" name="instagram" placeholder="optional" fullWidth onChange={this.handleChange} InputProps={{
-                startAdornment: (<InputAdornment position="start">
-                  <InstagramIcon/>
-                </InputAdornment>)
-              }}/>
-          </Grid>
         </Grid>
-      </Grid>
       <div className="form-footer">
         <Grid container spacing={1} alignItems="center" justify="center">
           <FormControlLabel control={<Checkbox required checked = {
@@ -151,11 +148,11 @@ class AddBusiness extends Component {
             onChange = {
               this.handleChange
             }
-            name = "terms" />} label="I understand my email will not be distributed or displayed and only will be used by the administrator of this app to verify my submission and completion of my goal."/>
+            name = "terms" />} label="I understand my email will not be distributed or displayed. Solely the administrator will look at this information to see if you're a real human."/>
         </Grid>
         <Box mt={2}>
           <Grid container spacing={1} alignItems="center" justify="center">
-            <Button className="submit-button" type="submit" variant="contained" color="secondary">Add Business</Button>
+            <Button className="submit-button" type="submit" variant="contained" color="primary">Add Business</Button>
           </Grid>
         </Box>
         {this.state.showError &&
@@ -165,7 +162,7 @@ class AddBusiness extends Component {
         }
       </div>
     </form>
-  </div> < />
+  </div> </Container></div></>
 )
 }
 }

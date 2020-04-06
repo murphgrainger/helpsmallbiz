@@ -8,18 +8,17 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 
 
-function Navbar(props) {
+function NavbarSecondary(props) {
   return (
-    <AppBar position="static" className="Navbar" >
-      <Grid container alignItems="flex-end" justify="flex-end">
+    <AppBar position="static" className="Navbar">
+      <Grid container alignItems="flex-start" justify="flex-start">
         <Box mr={1}>
-          <Button color="primary" variant="outlined" href="/add-a-business">Add a Challenge</Button>
+          <Button color="primary" variant="contained" href="/">Back to Home</Button>
         </Box>
-        <Button color="secondary" variant="contained" href="#challenges">Log Support</Button>
       </Grid>
     </AppBar>
   )
 }
 
 
-export default Navbar;
+export default NavbarSecondary;

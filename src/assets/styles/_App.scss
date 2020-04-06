@@ -5,7 +5,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(164deg, rgba(2,0,36,.9) 0%, rgba(0,38,104,.9) 75%, rgba(50,103,113,.8) 100%);
 }
 
 .App-logo {
@@ -33,7 +32,21 @@
   padding: $pad;
   max-width: 900px;
   color: white;
-  filter: blur(0);
+  margin: auto;
+
+  h1 {
+    margin: 0;
+  }
+
+  .sub-header {
+    font-size: 28px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  >img {
+    width: 90px;
+  }
 }
 
 

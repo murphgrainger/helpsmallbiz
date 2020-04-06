@@ -1,7 +1,7 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('business', function(table) {
+  return knex.schema.createTable('goal', function(table) {
     table.increments();
-    table.timestamps([true], [true]);
+    table.timestamp('created_at').defaultTo(knex.fn.now());
     table.text('firstName').notNullable();
     table.text('lastName').notNullable();
     table.text('email').notNullable();
@@ -13,9 +13,10 @@ exports.up = function(knex, Promise) {
     table.text('website').notNullable();
     table.text('place_id').notNullable();
     table.text('instagram');
+    table.decimal('amountRaised');
   });
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('business');
+  return knex.schema.dropTable('goal');
 };

@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   margin: $pad-double 0;
+  max-width: 650px;
 }
 
 .support-form {
@@ -17,8 +18,15 @@
   max-width: 600px;
 }
 
+.radio-label {
+  margin-top: $pad;
+}
+
+.form-label--info {
+  margin-left: $pad;
+}
+
 .form-footer {
-  margin-top: $pad-half;
   width: 100%;
   display: flex;
   flex-direction: column;

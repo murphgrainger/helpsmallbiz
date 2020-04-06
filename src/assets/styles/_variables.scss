@@ -1,17 +1,24 @@
 $color-yellow: #DBD56E;
-$color-navy: #002668;
+$color-green: #1B5460;
 $color-light-white: #f9f9f9;
-$color-red: #931621;
+$color-red: #CA3739;
+$color-grey: #A6A6A6;
+$color-grey-light: #F9F9F9;
 
 
 $pad: 1em;
 $pad-half: 1.5em;
 $pad-double: 2em;
+$pad-triple: 3em;
 
 .MuiAutocomplete-popupIndicator {
   display: none!important;
 }
 
 .MuiGrid-container {
-  padding: .5em;
+  padding: $pad;
+}
+
+.MuiSvgIcon-root {
+  color: black;
 }
