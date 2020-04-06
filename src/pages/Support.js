@@ -151,7 +151,7 @@ class Support extends Component {
             <TextField required id="standard-basic" variant="outlined" label="First Name" name="firstName" fullWidth onChange={this.handleChange}/>
           </Grid>
           <Grid item xs={6}>
-            <TextField required id="standard-basic" variant="outlined" label="Last Name" name="lastName" fullWidth onChange={this.handleChange}/>
+            <TextField id="standard-basic" variant="outlined" label="Last Name" name="lastName" fullWidth onChange={this.handleChange}/>
           </Grid>
         </Grid>
         <Grid container spacing={1} alignItems="center">
@@ -171,8 +171,8 @@ class Support extends Component {
               }}/>
           </Grid>
           <FormControlLabel
-            control={<Switch checked={this.state.anonymous} onChange={this.handleChange} name="anonymous" />}
-            label="Make my pledge anonymous."
+            control={<Switch checked={this.state.anonymous} onChange={this.handleChange} color="secondary" name="anonymous" />}
+            label="Make my support anonymous."
           />
         </Grid>
       </Grid>

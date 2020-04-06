@@ -9,8 +9,8 @@ export const THEME = {
       },
     secondary:
       {
-        main: '#A6A6A6',
-        light: 'CA3739'
+        light: '#A6A6A6',
+        main: '#CA3739'
       },
     info:
       {
@@ -19,6 +19,7 @@ export const THEME = {
   },
   typography: {
   fontFamily: [
+    'Roboto Condensed',
     'Lato',
     'Roboto',
     '"Helvetica Neue"',

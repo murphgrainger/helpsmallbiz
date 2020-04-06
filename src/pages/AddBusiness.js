@@ -112,7 +112,6 @@ class AddBusiness extends Component {
         <Grid item xs={12}>
           <Autocomplete setValue={this.setLocationValue}/>
         </Grid>
-        <Grid container spacing={1} alignItems="center">
           <Grid item xs={12}>
             <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose this business?" fullWidth onChange={this.handleChange}/>
           </Grid>
@@ -120,37 +119,27 @@ class AddBusiness extends Component {
             <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="challenge" label="Your Challenge" fullWidth onChange={this.handleChange}/>
           </Grid>
         </Grid>
-        <p>Your Information &nbsp;</p>
-        <Tooltip title="Your name will be displayed publicly attached to this business. Your instagram handle will also appear if you share it.  Your email will solely be used for internal communication from the administrator." aria-label="add" placement="right-start">
-          <InfoIcon color="primary" fontSize="small"/>
-        </Tooltip>
-
+        <Grid container spacing={1} alignItems="center">
+            <p style={{'margin':0}}>Your Information <Tooltip title="Your name will be displayed publicly attached to this business. Your email will not be displayed or distributed." aria-label="add" placement="right-start">
+              <InfoIcon color="primary" fontSize="small"/>
+              </Tooltip>
+            </p>
+        </Grid>
         <Grid container spacing={1} alignItems="center">
           <Grid item xs={6}>
             <TextField required id="standard-basic" variant="outlined" label="First Name" name="firstName" fullWidth onChange={this.handleChange}/>
           </Grid>
           <Grid item xs={6}>
-            <TextField required id="standard-basic" variant="outlined" label="Last Name" name="lastName" fullWidth onChange={this.handleChange}/>
+            <TextField id="standard-basic" variant="outlined" label="Last Name" name="lastName" fullWidth onChange={this.handleChange}/>
           </Grid>
-        </Grid>
-        <Grid container spacing={1} alignItems="center">
-
-          <Grid item xs={6}>
+          <Grid item xs={12}>
             <TextField required id="standard-basic" variant="outlined" type="email" label="Email" name="email" placeholder="for internal use only" fullWidth onChange={this.handleChange} InputProps={{
                 startAdornment: (<InputAdornment position="start">
                   <MailOutlineSharpIcon/>
                 </InputAdornment>)
               }}/>
           </Grid>
-          <Grid item xs={6}>
-            <TextField id="standard-basic" variant="outlined" label="Instagram Handle" name="instagram" placeholder="optional" fullWidth onChange={this.handleChange} InputProps={{
-                startAdornment: (<InputAdornment position="start">
-                  <InstagramIcon/>
-                </InputAdornment>)
-              }}/>
-          </Grid>
         </Grid>
-      </Grid>
       <div className="form-footer">
         <Grid container spacing={1} alignItems="center" justify="center">
           <FormControlLabel control={<Checkbox required checked = {
@@ -159,7 +148,7 @@ class AddBusiness extends Component {
             onChange = {
               this.handleChange
             }
-            name = "terms" />} label="I understand my email will not be distributed or displayed and only will be used by the administrator of this app to verify my submission and completion of my goal."/>
+            name = "terms" />} label="I understand my email will not be distributed or displayed. Solely the administrator will look at this information to see if you're a real human."/>
         </Grid>
         <Box mt={2}>
           <Grid container spacing={1} alignItems="center" justify="center">

@@ -10,7 +10,7 @@ import Box from '@material-ui/core/Box';
 
 function NavbarSecondary(props) {
   return (
-    <AppBar position="static" color="secondary" >
+    <AppBar position="static" className="Navbar">
       <Grid container alignItems="flex-start" justify="flex-start">
         <Box mr={1}>
           <Button color="primary" variant="contained" href="/">Back to Home</Button>

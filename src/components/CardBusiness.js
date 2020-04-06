@@ -24,6 +24,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import PersonIcon from '@material-ui/icons/Person';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/Phone';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import image from '../assets/images/tennyson-st.jpg';
 
 import PledgeCard from './CardHorizontal';
@@ -42,16 +43,20 @@ const styles = theme => ({
   },
   header: {
     background: "#e6e6e6",
-    padding: 16
+    padding: 16,
+    minHeight: 78,
+    display: "flex",
+    alignItems: "center"
   },
   overlay: {
     position: 'absolute',
     width: '100%',
+    height: '100%',
     background: 'rgba(15,53,66,.6)',
     color: 'white'
   },
   wrapper: {
-    padding: '1em'
+    padding: '12px'
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -80,6 +85,10 @@ const styles = theme => ({
   },
   whiteIcon: {
     color: "white"
+  },
+  greenIcon: {
+    color: "#1B5460",
+    fontWeight: 700
   },
   spaceBetween: {
     justifyContent: "space-between"
@@ -127,15 +136,16 @@ render() {
   })
   return (
     <Card className={classes.root}>
+      <Grid item xs={12} style={{'display':'flex'}}>
       <CardMedia
         className='card-media'
         image={this.state.photoUrl}
         title={this.props.info.businessName}>
        <div className={classes.overlay}>
          <div className={classes.wrapper}>
-           <Typography variant="h5" component="h2">
+           <h3 className="card-business-title">
               {this.props.info.businessName}
-                </Typography>
+            </h3>
                 <div><a href={`https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${this.props.info.place_id}`} target="_blank"><IconButton size="small"><LocationOnIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
                 <a href={`tel:${this.props.info.businessPhone}`}><IconButton size="small"><PhoneIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
                 <a href={this.props.info.website} target="_blank"><IconButton size="small"><LanguageIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
@@ -143,34 +153,30 @@ render() {
           </div>
        </div>
        </CardMedia>
-
    <Grid item md={9}>
      <Grid container spacing={1} justify="space-between" className={classes.header}>
        <Grid item md={10} className={classes.alignLeft}>
           <Typography variant="h6" className="text-red" component="p">
             <StarIcon fontSize="small" className="text-red"/> {this.props.info.challenge}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            <PersonIcon/>{` ${this.props.info.firstName} ${this.props.info.lastName}`}
-          </Typography>
        </Grid>
        <Grid item md={2} className={classes.alignRight}>
-         <Typography variant="h5" color="textSecondary" component="p">
-           ${this.props.info.amountRaised || 0}
-         </Typography>
-         <Typography variant="body2" color="textSecondary" component="p">
-           Raised
-         </Typography>
+           {this.props.info.amountRaised > 0
+             ? <Typography variant="h5" color="textSecondary" component="p" className={classes.greenIcon}>${this.props.info.amountRaised} <TrendingUpIcon fontSize="small" className={classes.greenIcon}/></Typography>
+           : <Typography variant="h5" color="textSecondary" component="p">$0</Typography>}
        </Grid>
      </Grid>
    <CardContent className={classes.cardContent}>
      <Typography variant="body2" color="textSecondary" component="p">
-       <strong>The Why: </strong>{this.props.info.description}
+       <strong>Who: </strong>{` ${this.props.info.firstName} ${this.props.info.lastName}`}
+     </Typography>
+     <Typography variant="body2" color="textSecondary" component="p">
+       <strong>Why: </strong>{this.props.info.description}
      </Typography>
       </CardContent>
         <CardActions className={classes.spaceBetween}>
           <Link to={{pathname: "/support-a-business", state:{business: this.props.info}}} style={{ textDecoration: 'none' }}>
-            <Button size="small" color="primary" variant="contained">
+            <Button size="large" color="secondary" variant="contained">
               Log Support
             </Button>
           </Link>
@@ -185,12 +191,13 @@ render() {
               <ExpandMoreIcon />
             </IconButton>
         </CardActions>
-      <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
-        <div className={classes.expandedContent}>
-          { pledges }
-        </div>
-      </Collapse>
     </Grid>
+  </Grid>
+    <Collapse in={this.state.expanded} timeout="auto" unmountOnExit style={{'width': '100%'}}>
+      <div className={classes.expandedContent}>
+        { pledges }
+      </div>
+    </Collapse>
     </Card>
   );
 }
