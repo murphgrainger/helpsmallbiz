@@ -13,9 +13,20 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: $pad-double;
   padding-top: 0;
   max-width: 600px;
+}
+
+.form-title {
+  text-align: center;
+  background: $color-green;
+  color: white;
+  margin: 0;
+  padding: 14px;
+}
+
+.form-business-title {
+  margin: 12px;
 }
 
 .radio-label {
@@ -33,7 +44,6 @@
   align-items: center;
 
   .MuiTypography-body1 {
-    font-size: 12px;
     text-align: left;
   }
 }

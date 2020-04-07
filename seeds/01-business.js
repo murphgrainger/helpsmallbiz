@@ -17,8 +17,7 @@ exports.seed = function(knex) {
           website: "https://cask-and-craft.com",
           place_id: "ChIJdZJN7Ix4bIcR2qGBGL36KHE",
           instagram:"caskandcraft",
-          amountRaised: 0,
-          photoUrl: "https://maps.googleapis.com/maps/api/place/js/PhotoService.GetPhoto?1sCmRaAAAAmm9af6hT97tMGSgbMAnoIJPk59oUFrc-_wlKc-EOrJJAY8I7vlGgS6Xilkd-B84McqSQdTpP4g17dk9oQpbToSqZVHuawDBCvFLXqRH_bb_qjYB7465rSP7X1i0n0ZztEhAWTUX1nCNSK3SH_SchjYdBGhS_NDlmwFNF_zRnkDRvjEm1D4IrMg&3u4272&5m1&2e1&callback=none&key=AIzaSyDFw93MLRIha9qQPU_1Lr8GOPOdpAtOhsM&token=65420"
+          amountRaised: 0
         },
         {
           created_at: new Date(),
@@ -33,8 +32,7 @@ exports.seed = function(knex) {
           website: "https://www.methodroasters.com",
           place_id: "ChIJpUIayyt5bIcRNzvQfJwPq28",
           instagram:"methodcollective",
-          amountRaised: 100.00,
-          photoUrl: "https://maps.googleapis.com/maps/api/place/js/PhotoService.GetPhoto?1sCmRaAAAAx3-pPWnOQ5bYuOXu6Q1Z57QO62lJmMki4SCUFYk0NE1guR8JMD0H68vuuyFFTSRrsK8DAOgBLznArqB7vw5ILvN9Embwg3fI0t8jhECzrKQINcvjlijkk3QO5qVQUZtEEhBfR3EeX898gYorB8y3hhNwGhShzulXQMT1J7pEHis06t7dGhF-sg&3u4608&5m1&2e1&callback=none&key=AIzaSyDFw93MLRIha9qQPU_1Lr8GOPOdpAtOhsM&token=117556"
+          amountRaised: 0,
         }
       ]);
     });

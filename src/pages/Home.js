@@ -36,7 +36,7 @@ class Home extends Component {
       let result = await response.json();
       let cards = result.map((biz,i) => {
         return (
-          <CardBusiness key={i} info={biz}/>
+          <CardBusiness key={i} info={biz} refreshBusinesses={this.getAllBusinesses}/>
       )
       })
       this.setState({

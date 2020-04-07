@@ -28,6 +28,7 @@ import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import image from '../assets/images/tennyson-st.jpg';
 
 import PledgeCard from './CardHorizontal';
+import Dialog from './Dialog';
 
 import { GOOGLE_API_KEY } from '../constants';
 
@@ -155,12 +156,12 @@ render() {
        </CardMedia>
    <Grid item md={9}>
      <Grid container spacing={1} justify="space-between" className={classes.header}>
-       <Grid item md={10} className={classes.alignLeft}>
+       <Grid item md={9} className={classes.alignLeft}>
           <Typography variant="h6" className="text-red" component="p">
             <StarIcon fontSize="small" className="text-red"/> {this.props.info.challenge}
           </Typography>
        </Grid>
-       <Grid item md={2} className={classes.alignRight}>
+       <Grid item md={3} className={classes.alignRight}>
            {this.props.info.amountRaised > 0
              ? <Typography variant="h5" color="textSecondary" component="p" className={classes.greenIcon}>${this.props.info.amountRaised} <TrendingUpIcon fontSize="small" className={classes.greenIcon}/></Typography>
            : <Typography variant="h5" color="textSecondary" component="p">$0</Typography>}
@@ -175,11 +176,7 @@ render() {
      </Typography>
       </CardContent>
         <CardActions className={classes.spaceBetween}>
-          <Link to={{pathname: "/support-a-business", state:{business: this.props.info}}} style={{ textDecoration: 'none' }}>
-            <Button size="large" color="secondary" variant="contained">
-              Log Support
-            </Button>
-          </Link>
+          <Dialog info={this.props.info} refreshBusinesses={this.props.refreshBusinesses}/>
           <IconButton
               className={clsx(classes.expand, {
                 [classes.expandOpen]: this.state.expanded,
