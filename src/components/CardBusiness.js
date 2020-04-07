@@ -137,7 +137,7 @@ render() {
   })
   return (
     <Card className={classes.root}>
-      <Grid item xs={12} style={{'display':'flex'}}>
+      <Grid item xs={12} style={{'display':'flex', 'flexWrap':'wrap'}}>
       <CardMedia
         className='card-media'
         image={this.state.photoUrl}

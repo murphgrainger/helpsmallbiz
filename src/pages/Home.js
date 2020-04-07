@@ -124,10 +124,10 @@ render() {
         </Grid>
     </Container>
   </div>
-  <div className="section -grey">
+  <div className="section -grey" id="challenges">
   <Container maxWidth="lg" className="">
     <h2>Current Challenges</h2>
-    <Grid container item xs={12} className="goal-bar" justify="center" id="challenges">
+    <Grid container item xs={12} className="goal-bar" justify="center">
       {this.state.cards}
     </Grid>
     <p>Want to add different challenge?</p>
