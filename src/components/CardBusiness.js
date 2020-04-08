@@ -1,36 +1,24 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
 
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-
 import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import LanguageIcon from '@material-ui/icons/Language';
-import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import StarIcon from '@material-ui/icons/Star';
-import DescriptionIcon from '@material-ui/icons/Description';
-import PersonIcon from '@material-ui/icons/Person';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/Phone';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
-import image from '../assets/images/tennyson-st.jpg';
-
 import PledgeCard from './CardHorizontal';
 import Dialog from './Dialog';
 
-import { GOOGLE_API_KEY } from '../constants';
 
 
 const styles = theme => ({
@@ -140,16 +128,16 @@ render() {
       <Grid item xs={12} style={{'display':'flex', 'flexWrap':'wrap'}}>
       <CardMedia
         className='card-media'
-        image={this.state.photoUrl}
-        title={this.props.info.businessName}>
+        image={this.state.photoUrl}>
        <div className={classes.overlay}>
          <div className={classes.wrapper}>
            <h3 className="card-business-title">
               {this.props.info.businessName}
             </h3>
-                <div><a href={`https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${this.props.info.place_id}`} target="_blank"><IconButton size="small"><LocationOnIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
+            <span>{this.props.info.businessAddress}</span>
+                <div><a href={`https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${this.props.info.place_id}`} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LocationOnIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
                 <a href={`tel:${this.props.info.businessPhone}`}><IconButton size="small"><PhoneIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
-                <a href={this.props.info.website} target="_blank"><IconButton size="small"><LanguageIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
+                <a href={this.props.info.website} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LanguageIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
             </div>
           </div>
        </div>
