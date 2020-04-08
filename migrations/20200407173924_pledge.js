@@ -6,8 +6,8 @@ exports.up = function(knex, Promise) {
     table.decimal('amount').notNullable();
     table.text('type').notNullable();
     table.text('firstName').notNullable();
-    table.text('lastName').notNullable();
-    table.text('email').notNullable();
+    table.text('lastName');
+    table.text('email');
     table.text('instagram');
     table.boolean('anonymous');
     table.integer('goal_id').unsigned().references('goal.id').onDelete('CASCADE').notNullable();

@@ -36,7 +36,7 @@ class Home extends Component {
       let result = await response.json();
       let cards = result.map((biz,i) => {
         return (
-          <CardBusiness key={i} info={biz}/>
+          <CardBusiness key={i} info={biz} refreshBusinesses={this.getAllBusinesses}/>
       )
       })
       this.setState({
@@ -124,10 +124,10 @@ render() {
         </Grid>
     </Container>
   </div>
-  <div className="section -grey">
+  <div className="section -grey" id="challenges">
   <Container maxWidth="lg" className="">
     <h2>Current Challenges</h2>
-    <Grid container item xs={12} className="goal-bar" justify="center" id="challenges">
+    <Grid container item xs={12} className="goal-bar" justify="center">
       {this.state.cards}
     </Grid>
     <p>Want to add different challenge?</p>

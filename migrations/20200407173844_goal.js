@@ -8,10 +8,10 @@ exports.up = function(knex, Promise) {
     table.text('description').notNullable();
     table.text('challenge').notNullable();
     table.text('businessName').notNullable();
-    table.text('businessAddress').notNullable();
-    table.text('businessPhone').notNullable();
-    table.text('website').notNullable();
     table.text('place_id').notNullable();
+    table.text('businessAddress');
+    table.text('businessPhone');
+    table.text('website');
     table.text('instagram');
     table.decimal('amountRaised');
   });
