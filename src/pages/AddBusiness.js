@@ -14,6 +14,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import Box from '@material-ui/core/Box';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MailOutlineSharpIcon from '@material-ui/icons/MailOutlineSharp';
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 class AddBusiness extends Component {
   constructor(props) {
@@ -25,7 +26,6 @@ class AddBusiness extends Component {
       email: "",
       description: "",
       challenge: "",
-      instagram: "",
       terms: false,
       placeSelected: "",
       placeDetails: "",
@@ -35,6 +35,7 @@ class AddBusiness extends Component {
       businessPhoto: "",
       website: "",
       place_id:"",
+      amount:"",
       showError: false
     }
   }
@@ -49,7 +50,7 @@ class AddBusiness extends Component {
   };
 
   setLocationValue = (value) => {
-    this.getPlaceDetails(value.place_id)
+    if(value) this.getPlaceDetails(value.place_id);
   }
 
   async getPlaceDetails(id) {
@@ -73,8 +74,8 @@ class AddBusiness extends Component {
 
   onSubmit = async (event) => {
     event.preventDefault();
-    const { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website } = this.state;
-    const data = { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website };
+    const { firstName, lastName, email, description, challenge, businessName, place_id, amount, businessAddress, businessPhone, website } = this.state;
+    const data = { firstName, lastName, email, description, challenge, businessName, place_id, amount, businessAddress, businessPhone, website };
       try {
         let response = await fetch('/goal/add', {
           method: 'POST',
@@ -114,16 +115,29 @@ class AddBusiness extends Component {
             <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose this business?" fullWidth onChange={this.handleChange}/>
           </Grid>
           <Grid item xs={12}>
-            <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="challenge" label="Your Challenge" fullWidth onChange={this.handleChange}/>
+              <p className="challenge-label">Your Challenge
+              </p>
           </Grid>
-        </Grid>
-        <Grid container spacing={1} alignItems="center">
-            <p style={{'margin':0}}>Your Information <Tooltip title="Your name will be displayed publicly attached to this business. Your email will not be displayed or distributed." aria-label="add" placement="right-start">
-              <InfoIcon color="primary" fontSize="small"/>
-              </Tooltip>
-            </p>
-        </Grid>
-        <Grid container spacing={1} alignItems="center">
+            <Grid item xs={5} sm={2}>
+            <p className="challenge-span">If we log ...</p>
+          </Grid>
+          <Grid item xs={7} sm={4}>
+              <TextField required id="standard-basic" variant="outlined" name="amount" label="Amount" fullWidth onChange={this.handleChange} InputProps={{
+                 startAdornment: (<InputAdornment position="start">
+                   <AttachMoneyIcon/>
+                 </InputAdornment>)
+               }}/>
+             </Grid>
+
+           <Grid item xs={12} sm={6}>
+             <p className="challenge-span" style={{"textAlign": "left"}}>&nbsp; ... I will ...</p>
+             </Grid>
+             <Grid item xs={12}>
+               <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="challenge" placeholder="ex: order 10 pizzas for my street." fullWidth onChange={this.handleChange}/>
+          </Grid>
+          <Grid item xs={12}>
+              <p className="challenge-label">Your Information</p>
+            </Grid>
           <Grid item xs={6}>
             <TextField required id="standard-basic" variant="outlined" label="First Name" name="firstName" fullWidth onChange={this.handleChange}/>
           </Grid>

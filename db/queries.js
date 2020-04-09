@@ -14,7 +14,8 @@ module.exports = {
       businessAddress: b.businessAddress,
       businessPhone: b.businessPhone,
       website: b.website,
-      amountRaised: 0
+      amountRaised: 0,
+      amount: Number(b.amount)
     })
   },
 

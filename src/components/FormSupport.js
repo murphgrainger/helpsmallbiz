@@ -25,7 +25,7 @@ export default function FormSupport(props) {
        </h5>
       <Grid container spacing={1} alignItems="center">
           <Grid item xs={12} sm={6}>
-             <TextField required id="standard-basic" variant="outlined" name="amount" type="number" step='0.01' label="Amount" fullWidth onChange={props.handleChange} InputProps={{
+             <TextField required id="standard-basic" variant="outlined" name="amount" type="text" step='0.01' label="Amount" fullWidth onChange={props.handleChange} InputProps={{
                 startAdornment: (<InputAdornment position="start">
                   <AttachMoneyIcon/>
                 </InputAdornment>)

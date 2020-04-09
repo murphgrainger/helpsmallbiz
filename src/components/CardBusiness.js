@@ -18,7 +18,7 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import PledgeCard from './CardHorizontal';
 import Dialog from './Dialog';
-
+import PersonIcon from '@material-ui/icons/Person';
 
 const styles = theme => ({
   root: {
@@ -110,7 +110,7 @@ class CardBusiness extends React.Component {
       await service.getDetails({
         placeId: biz.place_id
       }, (place, status) => {
-        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        if (status === window.google.maps.places.PlacesServiceStatus.OK && place.photos) {
           this.setState({
             photoUrl:place.photos[0].getUrl()
           })
@@ -156,9 +156,9 @@ render() {
        </Grid>
      </Grid>
    <CardContent className={classes.cardContent}>
-     <Typography variant="body2" color="textSecondary" component="p">
-       <strong>Who: </strong>{` ${this.props.info.firstName} ${this.props.info.lastName}`}
-     </Typography>
+     <p variant="body1" component="p" className={classes.greenIcon} style={{"display": "flex", "alignItems":"center", "marginTop": "0"}}>
+       <PersonIcon size="small" className={classes.greenIcon} style={{"marginRight":"6px"}}/>{`${this.props.info.firstName} ${this.props.info.lastName}`}
+     </p>
      <Typography variant="body2" color="textSecondary" component="p">
        <strong>Why: </strong>{this.props.info.description}
      </Typography>
