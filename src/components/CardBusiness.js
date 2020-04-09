@@ -80,6 +80,13 @@ const styles = theme => ({
   },
   spaceBetween: {
     justifyContent: "space-between"
+  },
+  spanText: {
+    position: "absolute",
+    color: "#1B5460",
+    right: 5,
+    top: 32,
+    fontSize: 12
   }
 });
 
@@ -142,17 +149,18 @@ render() {
           </div>
        </div>
        </CardMedia>
-   <Grid item md={9}>
+   <Grid item xs={12} md={9}>
      <Grid container spacing={1} justify="space-between" className={classes.header}>
        <Grid item md={9} className={classes.alignLeft}>
           <Typography variant="h6" className="text-red" component="p">
             <StarIcon fontSize="small" className="text-red"/> {this.props.info.challenge}
           </Typography>
        </Grid>
-       <Grid item md={3} className={classes.alignRight}>
+       <Grid item md={3} className={classes.alignRight} style={{"position":"relative"}}>
            {this.props.info.amountRaised > 0
-             ? <Typography variant="h5" color="textSecondary" component="p" className={classes.greenIcon}>${this.props.info.amountRaised} <TrendingUpIcon fontSize="small" className={classes.greenIcon}/></Typography>
+             ? <Typography variant="h5" color="textSecondary" component="p" className={classes.greenIcon}>${this.props.info.amountRaised}</Typography>
            : <Typography variant="h5" color="textSecondary" component="p">$0</Typography>}
+                {this.props.info.amountRaised > 0 ? <span className={classes.spanText}>Logged</span> : null}
        </Grid>
      </Grid>
    <CardContent className={classes.cardContent}>
