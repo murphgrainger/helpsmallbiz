@@ -12,7 +12,6 @@ import InfoIcon from '@material-ui/icons/Info';
 import Button from '@material-ui/core/Button';
 import Tooltip from '@material-ui/core/Tooltip';
 import Box from '@material-ui/core/Box';
-import InstagramIcon from '@material-ui/icons/Instagram';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MailOutlineSharpIcon from '@material-ui/icons/MailOutlineSharp';
 
@@ -67,7 +66,6 @@ class AddBusiness extends Component {
           businessPhone: place.formatted_phone_number,
           website: place.website,
           place_id: place.place_id,
-          photoUrl: ""
         })
       }
     })
@@ -75,8 +73,8 @@ class AddBusiness extends Component {
 
   onSubmit = async (event) => {
     event.preventDefault();
-    const { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website, photoUrl } = this.state;
-    const data = { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website, photoUrl };
+    const { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website } = this.state;
+    const data = { firstName, lastName, email, description, challenge, businessName, place_id, instagram, businessAddress, businessPhone, website };
       try {
         let response = await fetch('/goal/add', {
           method: 'POST',

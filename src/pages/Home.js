@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import CardBusiness from '../components/CardBusiness';
-import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
@@ -22,7 +21,7 @@ class Home extends Component {
   }
 
  componentDidMount() {
-    let businesses = this.getAllBusinesses()
+    this.getAllBusinesses();
   }
 
    getAllBusinesses = async () => {
@@ -62,7 +61,7 @@ render() {
         <Grid container spacing={3}>
           <Grid item xs={12} className="home-content">
             <header className="App-header">
-              <img src={Image}></img>
+              <img src={Image} alt="logo"></img>
               <h4 className="sub-header">Welcome to Our</h4>
               <h1 className="noTop--margin">Small Biz Support<br></br>Challenge</h1>
             </header>
@@ -93,18 +92,17 @@ render() {
             <Grid item md={4}>
               <Card>
                 <CardContent>
-              <span className="list-icon">2</span>
-              <h5 className="text-red">Get Friends to Log Support</h5>
-              <p>to your challenge through orders, gift cards, deliveries, and beyond</p>
+                  <span className="list-icon">2</span>
+                  <h5 className="text-red">Get Friends to Log Support</h5>
+                  <p>to your challenge through orders, gift cards, deliveries, and beyond</p>
                 <Divider />
-                <ul>
-                <li>Sarah order $50 delivery</li>
-                <li>Roque bough $10 gift card</li>
-                <li>Brooke donated $40</li>
-          </ul>
-        </CardContent>
-
-        </Card>
+                  <ul>
+                    <li>Sarah order $50 delivery</li>
+                    <li>Roque bough $10 gift card</li>
+                    <li>Brooke donated $40</li>
+                </ul>
+              </CardContent>
+            </Card>
             </Grid>
               <Grid item md={4}>
                 <Card>
@@ -127,9 +125,30 @@ render() {
   <div className="section -grey" id="challenges">
   <Container maxWidth="lg" className="">
     <h2>Current Challenges</h2>
-    <Grid container item xs={12} className="goal-bar" justify="center">
-      {this.state.cards}
-    </Grid>
+    <Grid container spacing={2} justify="center">
+      <Grid item xs={12} md={9} className="goal-bar">
+        {this.state.cards}
+      </Grid>
+      <Grid item xs={12} md={3}>
+        <Card>
+          <CardContent>
+            <span className="list-icon">?</span>
+            <h5 className="text-red">How Do I Support</h5>
+            <p></p>
+          <Divider />
+            <ul style={{"paddingLeft":"1em"}}>
+              <li>Buy a gift card on the biz's website</li>
+              <li>Use 3rd Party services like GrubHub</li>
+              <li>Call the owner and Venmo straight cash</li>
+              <li>Pay for your regular haircut even though you didn't go</li>
+              <li>Buy gifts for friends in quarantine</li>
+              <li>Send a pizza to someone in need</li>
+              <li>Buy a year's supply of coffee upfront</li>
+          </ul>
+        </CardContent>
+      </Card>
+      </Grid>
+  </Grid>
     <p>Want to add different challenge?</p>
     <Button variant="contained" color="primary" href="/add-a-business">Add a Challenge</Button>
     </Container>

@@ -12,11 +12,23 @@
     }
   }
 }
+.amount .MuiTypography-body1{
+  color: $color-green;
+  font-weight: 700;
+}
 
 .card-business-title {
   margin: 0;
 }
 
+.CardBusiness-whiteIcon-214 {
+  transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    color: $color-red;
+    transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
 .card-media {
     flex-grow: 1;
     position: relative;
