@@ -1,11 +1,9 @@
-.main-navigation {
+.Navbar {
+  & {
+    background-color: $color-grey-light!important;
+  }
 
   ul {
     list-style: none;
-  }
-
-  a {
-    background: $color-yellow;
-    padding: $pad;
   }
 }

@@ -5,6 +5,9 @@
   flex-direction: column;
   align-items: center;
   margin: $pad-double 0;
+  max-width: 650px;
+  padding: $pad;
+  border-radius: 12px;
 }
 
 .support-form {
@@ -12,20 +15,47 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: $pad-double;
   padding-top: 0;
   max-width: 600px;
 }
 
+.form-title {
+  text-align: center;
+  background: $color-green;
+  color: white;
+  margin: 0;
+  padding: 14px;
+}
+
+.form-business-title {
+  margin: 12px;
+}
+
+.radio-label {
+  margin-top: $pad;
+}
+
+.form-label--info {
+  margin-left: $pad;
+}
+
 .form-footer {
-  margin-top: $pad-half;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 
   .MuiTypography-body1 {
-    font-size: 12px;
     text-align: left;
   }
+}
+
+.challenge-label {
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.challenge-span {
+  text-align: left;
 }

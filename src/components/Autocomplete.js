@@ -5,23 +5,9 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import { GOOGLE_API_KEY } from '../constants';
-
 import { makeStyles } from '@material-ui/core/styles';
 import parse from 'autosuggest-highlight/parse';
 import throttle from 'lodash/throttle';
-
-function loadScript(src, position, id) {
-  if (!position) {
-    return;
-  }
-
-  const script = document.createElement('script');
-  script.setAttribute('async', '');
-  script.setAttribute('id', id);
-  script.src = src;
-  position.appendChild(script);
-}
 
 const autocompleteService = { current: null };
 
@@ -36,19 +22,7 @@ export default function GoogleMaps(props) {
   const classes = useStyles();
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState([]);
-  const loaded = React.useRef(false);
 
-  if (typeof window !== 'undefined' && !loaded.current) {
-    if (!document.querySelector('#google-maps')) {
-      loadScript(
-        `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places`,
-        document.querySelector('head'),
-        'google-maps',
-      );
-    }
-
-    loaded.current = true;
-  }
 
   const handleChange = event => {
     setInputValue(event.target.value);

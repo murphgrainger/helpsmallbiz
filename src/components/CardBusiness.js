@@ -1,31 +1,50 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/Button';
-
+import Grid from '@material-ui/core/Grid';
 import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import LanguageIcon from '@material-ui/icons/Language';
-import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import StarIcon from '@material-ui/icons/Star';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import PhoneIcon from '@material-ui/icons/Phone';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import PledgeCard from './CardHorizontal';
+import Dialog from './Dialog';
+import PersonIcon from '@material-ui/icons/Person';
 
-import image from '../assets/images/tennyson-st.jpg';
-
-const useStyles = makeStyles(theme => ({
+const styles = theme => ({
   root: {
-    maxWidth: 345,
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    textAlign: 'left',
+    flexWrap: 'wrap',
+    marginBottom: 20
   },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
+  header: {
+    background: "#e6e6e6",
+    padding: 16,
+    minHeight: 78,
+    display: "flex",
+    alignItems: "center"
+  },
+  overlay: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    background: 'rgba(15,53,66,.6)',
+    color: 'white'
+  },
+  wrapper: {
+    padding: '12px'
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -34,86 +53,152 @@ const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.shortest,
     }),
   },
-  expandOpen: {
+   expandOpen: {
     transform: 'rotate(180deg)',
   },
-  avatar: {
-    backgroundColor: '#fff',
+  cardContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    flexGrow: 2,
   },
-}));
+  expandedContent: {
+    background: '#f1f1f1'
+  },
+  alignRight: {
+    textAlign: "right"
+  },
+  alignLeft: {
+    textAlign: "left"
+  },
+  whiteIcon: {
+    color: "white"
+  },
+  greenIcon: {
+    color: "#1B5460",
+    fontWeight: 700
+  },
+  spaceBetween: {
+    justifyContent: "space-between"
+  },
+  spanText: {
+    position: "absolute",
+    color: "#1B5460",
+    right: 5,
+    top: 32,
+    fontSize: 12
+  }
+});
 
-export default function CardBusiness(props) {
-  const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+class CardBusiness extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+    this.state = {
+      expanded: true,
+      photoUrl: "",
+      noPledges: false,
+      pledges: []
+    }
+  }
+
+  componentDidMount() {
+      this.getPlaceDetails(this.props.info);
+  }
+
+
+  handleExpandClick = async () => {
+    this.setState({expanded: !this.state.expanded})
   };
 
+  getPlaceDetails = async (biz) => {
+    if (window && window.google) {
+      let service = new window.google.maps.places.PlacesService(document.createElement('div'));
+      await service.getDetails({
+        placeId: biz.place_id
+      }, (place, status) => {
+        if (status === window.google.maps.places.PlacesServiceStatus.OK && place.photos) {
+          this.setState({
+            photoUrl:place.photos[0].getUrl()
+          })
+        }
+      })
+    }
+  };
+
+render() {
+  const { classes } = this.props;
+  const pledges = this.props.info.pledges.map((pledge, i) => {
+    return (<PledgeCard key={i} info={pledge}/>)
+  })
   return (
     <Card className={classes.root}>
-    <CardHeader
-        avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            R
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={`${props.info.firstName} ${props.info.lastName}`}
-        subheader="12pm today"
-      />
+      <Grid item xs={12} style={{'display':'flex', 'flexWrap':'wrap'}}>
       <CardMedia
-       className={classes.media}
-       image={image}
-       title={props.info.businessName}
-     />
-      <CardContent>
-      <Typography gutterBottom variant="h5" component="h2">
-         {props.info.businessName}
-       </Typography>
-       <Typography variant="body2" color="textSecondary" component="p">
-         {props.info.businessAddress}
-       </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {props.info.description}
-        </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {props.info.challenge}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <CardActions>
-      <Button size="small" color="primary" variant="outlined">
-        Log Support
-      </Button>
-    </CardActions>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-        <Button size="small" color="primary" variant="outlined">
-          See Goal
-        </Button>
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Method:</Typography>
-          <Typography paragraph>
-          {props.info.challenge}
-          {props.info.businessPhone}
-          {props.info.website}
+        className='card-media'
+        image={this.state.photoUrl}>
+       <div className={classes.overlay}>
+         <div className={classes.wrapper}>
+           <h3 className="card-business-title">
+              {this.props.info.businessName}
+            </h3>
+                <div><a href={`https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${this.props.info.place_id}`} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LocationOnIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
+                <a href={`tel:${this.props.info.businessPhone}`}><IconButton size="small"><PhoneIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
+                <a href={this.props.info.website} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LanguageIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
+            </div>
+          </div>
+       </div>
+       </CardMedia>
+   <Grid item xs={12} md={9}>
+     <Grid container spacing={1} justify="space-between" className={classes.header}>
+       <Grid item md={9} className={classes.alignLeft}>
+          <Typography variant="h6" className="text-red" component="p">
+            <StarIcon fontSize="small" className="text-red"/> {this.props.info.challenge}
           </Typography>
-        </CardContent>
-      </Collapse>
+       </Grid>
+       <Grid item md={3} className={classes.alignRight} style={{"position":"relative"}}>
+           {this.props.info.amountRaised > 0
+             ? <Typography variant="h5" color="textSecondary" component="p" className={classes.greenIcon}>${this.props.info.amountRaised}</Typography>
+           : <Typography variant="h5" color="textSecondary" component="p">$0</Typography>}
+                {this.props.info.amountRaised > 0 ? <span className={classes.spanText}>Logged</span> : null}
+       </Grid>
+     </Grid>
+   <CardContent className={classes.cardContent}>
+     <p variant="body1" component="p" className={classes.greenIcon} style={{"display": "flex", "alignItems":"center", "marginTop": "0"}}>
+       <PersonIcon size="small" className={classes.greenIcon} style={{"marginRight":"6px"}}/>{`${this.props.info.firstName} ${this.props.info.lastName}`}
+     </p>
+     <Typography variant="body2" color="textSecondary" component="p">
+       <strong>Why: </strong>{this.props.info.description}
+     </Typography>
+      </CardContent>
+        <CardActions className={classes.spaceBetween}>
+          <Dialog info={this.props.info} refreshBusinesses={this.props.refreshBusinesses}/>
+          {
+            pledges.length ?
+            <IconButton
+                className={clsx(classes.expand, {
+                  [classes.expandOpen]: this.state.expanded,
+                })}
+                onClick={this.handleExpandClick}
+                aria-expanded={this.state.expanded}
+                aria-label="show more"
+              >
+                <ExpandMoreIcon />
+              </IconButton>
+              : null
+          }
+
+        </CardActions>
+    </Grid>
+  </Grid>
+    <Collapse in={this.state.expanded} timeout="auto" unmountOnExit style={{'width': '100%'}}>
+      <div className={classes.expandedContent}>
+        { pledges }
+      </div>
+    </Collapse>
     </Card>
   );
 }
+}
+
+export default withStyles(styles)(CardBusiness);

@@ -1,18 +1,39 @@
 .Home {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(164deg, rgba(2,0,36,.9) 0%, rgba(0,38,104,.9) 75%, rgba(50,103,113,.8) 100%);
   min-height: 100vh;
   min-width: 100vw;
 
 .home-content {
-  padding: $pad-double;
+  padding: $pad-triple;
+  width: 100%;
+
 }
 
-.home-list {
-  padding: 0 2em;
-  max-width: 400px;
+.home-howto {
+  h5 {
+    margin-bottom: 0;
+  }
+}
+
+.list-icon {
+  border-radius: 50%;
+  width: 50px;
+  font-size: 23px;
+  border: 1px solid $color-red;
+  color: $color-red;
+  padding: 4px 12px;
+}
+
+.secondary-subheader {
+  margin: $pad-half;
+}
+
+.goal-bar {
+  display: flex;
+  flex-direction: column;
 }
 
 .goal-list li {

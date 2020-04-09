@@ -5,15 +5,21 @@ export const THEME = {
     palette: {
     primary:
       {
-        main: '#002668'
+        main: '#1B5460'
       },
     secondary:
       {
-        main: '#DBD56E'
+        light: '#A6A6A6',
+        main: '#CA3739'
+      },
+    info:
+      {
+        main: '#A6A6A6'
       }
   },
   typography: {
   fontFamily: [
+    'Roboto Condensed',
     'Lato',
     'Roboto',
     '"Helvetica Neue"',

@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
   color: black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -8,27 +8,42 @@ body {
 
 
 h1 {
-  font-size: 36px;
+  font-size: 70px;
+  text-transform: uppercase;
 }
 
 h2 {
   font-size: 28px;
+  text-transform: uppercase;
 }
 
 h3 {
   font-size: 22px;
+  font-weight: 600;
 }
 
 h4 {
   font-size: 18px;
 }
 
+h5 {
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
 p {
   font-size: 16px;
+  font-family: 'Lato', sans-serif!important;
+
 }
 
 ul,ol {
   text-align: left;
+  font-family: 'Lato', sans-serif;
+}
+
+.font-secondary {
+  font-family: 'Lato', sans-serif;
 }
 
 .font--yellow {
@@ -41,4 +56,44 @@ ul,ol {
 
 .noBottom--margin {
   margin-bottom: 0;
+}
+
+main {
+  width: 100%;
+}
+
+.text-white {
+  color: white;
+}
+
+.text-green {
+  color: $color-green;
+}
+
+.text-red {
+  color: $color-red;
+}
+
+.section {
+  background: $color-green;
+  width: 100%;
+  padding: $pad-triple 0;
+
+  &.-red {
+    background: $color-red;
+  }
+  &.-grey {
+    background: $color-grey-light;
+  }
+  &.-white {
+    background: white;
+  }
+  &.-thin {
+    padding: $pad 0;
+  }
+}
+
+.Support .container {
+  display: flex;
+  justify-content: center;
 }
