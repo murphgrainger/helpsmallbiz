@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 
 import FormSupport from './FormSupport';
 
@@ -70,8 +66,8 @@ class FormDialog extends React.Component {
         }
       })
       let result = await response.json();
-      if (result.status !== 200) throw new Error ()
-      this.props.refreshBusinesses()
+      if (result.status !== 200) throw new Error ();
+      this.props.refreshBusinesses();
       this.setState({
         open: false
       })

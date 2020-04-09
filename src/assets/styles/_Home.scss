@@ -33,7 +33,7 @@
 
 .goal-bar {
   display: flex;
-  border-radius: 5px;
+  flex-direction: column;
 }
 
 .goal-list li {
