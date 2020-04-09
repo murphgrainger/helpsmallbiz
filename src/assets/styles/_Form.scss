@@ -6,6 +6,8 @@
   align-items: center;
   margin: $pad-double 0;
   max-width: 650px;
+  padding: $pad;
+  border-radius: 12px;
 }
 
 .support-form {
@@ -46,4 +48,14 @@
   .MuiTypography-body1 {
     text-align: left;
   }
+}
+
+.challenge-label {
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.challenge-span {
+  text-align: left;
 }

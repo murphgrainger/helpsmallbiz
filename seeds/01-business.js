@@ -17,7 +17,8 @@ exports.seed = function(knex) {
           website: "https://cask-and-craft.com",
           place_id: "ChIJdZJN7Ix4bIcR2qGBGL36KHE",
           instagram:"caskandcraft",
-          amountRaised: 0
+          amountRaised: 0,
+          amount: 20
         },
         {
           created_at: new Date(),
@@ -33,6 +34,7 @@ exports.seed = function(knex) {
           place_id: "ChIJpUIayyt5bIcRNzvQfJwPq28",
           instagram:"methodcollective",
           amountRaised: 0,
+          amount: 30
         }
       ]);
     });

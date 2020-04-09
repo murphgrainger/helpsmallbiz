@@ -110,7 +110,7 @@ class CardBusiness extends React.Component {
       await service.getDetails({
         placeId: biz.place_id
       }, (place, status) => {
-        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+        if (status === window.google.maps.places.PlacesServiceStatus.OK && place.photos) {
           this.setState({
             photoUrl:place.photos[0].getUrl()
           })
