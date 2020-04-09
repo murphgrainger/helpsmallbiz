@@ -9,6 +9,7 @@ body {
 
 h1 {
   font-size: 70px;
+  text-transform: uppercase;
 }
 
 h2 {
@@ -32,10 +33,13 @@ h5 {
 
 p {
   font-size: 16px;
+  font-family: 'Lato', sans-serif!important;
+
 }
 
 ul,ol {
   text-align: left;
+  font-family: 'Lato', sans-serif;
 }
 
 .font-secondary {

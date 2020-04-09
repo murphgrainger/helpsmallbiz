@@ -51,10 +51,8 @@ export default function MediaControlCard(props) {
             <TrendingUpIcon className={classes.greenIcon} />
           </Avatar>
         </ListItemIcon>
-        <Grid xs={2} item>
+        <Grid xs={10} item>
           <ListItemText primary={name} secondary={props.info.description}/>
-        </Grid>
-        <Grid xs={8} item>
         </Grid>
         <Grid xs={2} className={classes.alignRight} item>
           <ListItemText className="amount" primary={`$${props.info.amount}`} secondary={props.info.type}/>

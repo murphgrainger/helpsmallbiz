@@ -122,7 +122,7 @@ class AddBusiness extends Component {
             <p className="challenge-span">If we log ...</p>
           </Grid>
           <Grid item xs={7} sm={4}>
-              <TextField required id="standard-basic" variant="outlined" name="amount" type="number" step='0.01' label="Amount" fullWidth onChange={this.handleChange} InputProps={{
+              <TextField required id="standard-basic" variant="outlined" name="amount" label="Amount" fullWidth onChange={this.handleChange} InputProps={{
                  startAdornment: (<InputAdornment position="start">
                    <AttachMoneyIcon/>
                  </InputAdornment>)
