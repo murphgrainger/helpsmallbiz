@@ -7,6 +7,7 @@ import CardBusiness from '../components/CardBusiness';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
+import Footer from '../components/Footer';
 
 import Image from '../assets/images/palm-icon.png'
 
@@ -34,7 +35,6 @@ class Home extends Component {
       })
       let result = await response.json();
       const sortedResults = result.sort((a, b) =>  new Date(b.created_at) - new Date(a.created_at))
-      console.log(sortedResults);
       let cards = sortedResults.map((biz,i) => {
         return (
           <CardBusiness key={i} info={biz} refreshBusinesses={this.getAllBusinesses}/>
@@ -154,6 +154,7 @@ render() {
     <Button variant="contained" color="primary" href="/add-a-business">Add a Challenge</Button>
     </Container>
   </div>
+  <Footer/>
     </div>
   )
 }
