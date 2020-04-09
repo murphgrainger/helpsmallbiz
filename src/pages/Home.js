@@ -129,6 +129,10 @@ render() {
     <Grid container spacing={2} justify="center">
       <Grid item xs={12} md={9} className="goal-bar">
         {this.state.cards}
+        <div>
+        <p>Passionate about a different business not listed?</p>
+        <Button variant="contained" color="primary" href="/add-a-business">Add a Challenge</Button>
+        </div>
       </Grid>
       <Grid item xs={12} md={3}>
         <Card>
@@ -150,8 +154,6 @@ render() {
       </Card>
       </Grid>
   </Grid>
-    <p>Passionate about a different business not listed?</p>
-    <Button variant="contained" color="primary" href="/add-a-business">Add a Challenge</Button>
     </Container>
   </div>
   <Footer/>

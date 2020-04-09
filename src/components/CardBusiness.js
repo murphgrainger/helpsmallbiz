@@ -153,7 +153,7 @@ render() {
      <Grid container spacing={1} justify="space-between" className={classes.header}>
        <Grid item md={9} className={classes.alignLeft}>
           <Typography variant="h6" className="text-red" component="p">
-            <StarIcon fontSize="small" className="text-red"/> {this.props.info.challenge}
+            <StarIcon fontSize="small" className="text-red"/> If we reach ${this.props.info.amount}, I will {this.props.info.challenge}
           </Typography>
        </Grid>
        <Grid item md={3} className={classes.alignRight} style={{"position":"relative"}}>
