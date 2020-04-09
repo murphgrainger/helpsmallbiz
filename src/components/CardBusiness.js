@@ -20,15 +20,14 @@ import PledgeCard from './CardHorizontal';
 import Dialog from './Dialog';
 
 
-
 const styles = theme => ({
   root: {
     width: '100%',
-    margin: 12,
     display: 'flex',
     flexDirection: 'row',
     textAlign: 'left',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    marginBottom: 20
   },
   header: {
     background: "#e6e6e6",
@@ -106,16 +105,18 @@ class CardBusiness extends React.Component {
   };
 
   getPlaceDetails = async (biz) => {
-    let service = new window.google.maps.places.PlacesService(document.createElement('div'));
-    await service.getDetails({
-      placeId: biz.place_id
-    }, (place, status) => {
-      if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-        this.setState({
-          photoUrl:place.photos[0].getUrl()
-        })
-      }
-    })
+    if (window && window.google) {
+      let service = new window.google.maps.places.PlacesService(document.createElement('div'));
+      await service.getDetails({
+        placeId: biz.place_id
+      }, (place, status) => {
+        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+          this.setState({
+            photoUrl:place.photos[0].getUrl()
+          })
+        }
+      })
+    }
   };
 
 render() {
@@ -134,7 +135,6 @@ render() {
            <h3 className="card-business-title">
               {this.props.info.businessName}
             </h3>
-            <span>{this.props.info.businessAddress}</span>
                 <div><a href={`https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${this.props.info.place_id}`} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LocationOnIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
                 <a href={`tel:${this.props.info.businessPhone}`}><IconButton size="small"><PhoneIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
                 <a href={this.props.info.website} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LanguageIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
@@ -165,16 +165,21 @@ render() {
       </CardContent>
         <CardActions className={classes.spaceBetween}>
           <Dialog info={this.props.info} refreshBusinesses={this.props.refreshBusinesses}/>
-          <IconButton
-              className={clsx(classes.expand, {
-                [classes.expandOpen]: this.state.expanded,
-              })}
-              onClick={this.handleExpandClick}
-              aria-expanded={this.state.expanded}
-              aria-label="show more"
-            >
-              <ExpandMoreIcon />
-            </IconButton>
+          {
+            pledges.length ?
+            <IconButton
+                className={clsx(classes.expand, {
+                  [classes.expandOpen]: this.state.expanded,
+                })}
+                onClick={this.handleExpandClick}
+                aria-expanded={this.state.expanded}
+                aria-label="show more"
+              >
+                <ExpandMoreIcon />
+              </IconButton>
+              : null
+          }
+
         </CardActions>
     </Grid>
   </Grid>

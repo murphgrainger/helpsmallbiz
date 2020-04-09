@@ -8,6 +8,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import PersonIcon from '@material-ui/icons/Person';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,6 +30,10 @@ const useStyles = makeStyles(theme => ({
   },
   smallText: {
     fontSize: 10
+  },
+  greenIcon: {
+    color: "#1B5460",
+    fontWeight: 700
   }
 }));
 
@@ -43,15 +48,16 @@ export default function MediaControlCard(props) {
       <ListItem>
         <ListItemIcon>
           <Avatar>
-            <PersonIcon />
+            <TrendingUpIcon className={classes.greenIcon} />
           </Avatar>
         </ListItemIcon>
-        <Grid xs={8} item>
-          <ListItemText primary={name} secondary={props.info.description} />
-          <span className={classes.smallText}>{`${createdDate.getMonth()}/${createdDate.getDay()}/${createdDate.getYear()}`}</span>
+        <Grid xs={2} item>
+          <ListItemText primary={name} secondary={props.info.description}/>
         </Grid>
-        <Grid className={classes.alignRight} item>
-          <ListItemText primary={`$${props.info.amount}`} secondary={props.info.type} />
+        <Grid xs={8} item>
+        </Grid>
+        <Grid xs={2} className={classes.alignRight} item>
+          <ListItemText className="amount" primary={`$${props.info.amount}`} secondary={props.info.type}/>
         </Grid>
       </ListItem>
       <Divider variant="inset" component="li" />
