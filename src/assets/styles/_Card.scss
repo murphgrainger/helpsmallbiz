@@ -47,4 +47,22 @@
   position: absolute;
   right: -16px;
   top: -13px;
+  z-index: 2;
+}
+
+.card-header-amount {
+  text-align: right;
+  position: relative;
+}
+
+@media (max-width: 960px) {
+  .card-header-amount {
+    text-align: left;
+  }
+  .pledge-icon {
+    display: none!important;
+  }
+  .challenge-complete {
+    display: none;
+  }
 }

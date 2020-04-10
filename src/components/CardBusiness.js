@@ -71,9 +71,6 @@ const styles = theme => ({
   expandedContent: {
     background: '#f1f1f1'
   },
-  alignRight: {
-    textAlign: "right"
-  },
   alignLeft: {
     textAlign: "left"
   },
@@ -172,7 +169,7 @@ render() {
             <StarIcon fontSize="small" className="text-red"/> If we log ${this.props.info.amount}, I will {this.props.info.challenge}
           </Typography>
        </Grid>
-       <Grid item md={3} className={classes.alignRight} style={{"position":"relative"}}>
+       <Grid item md={3} className="card-header-amount">
            {this.props.info.amountRaised > 0
              ? <Typography variant="h5" color="textSecondary" component="p" className={classes.greenIcon}>${this.props.info.amountRaised}</Typography>
            : <Typography variant="h5" color="textSecondary" component="p" className={classes.greenIcon}>$0.00</Typography>}
