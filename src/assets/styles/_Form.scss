@@ -50,6 +50,11 @@
   }
 }
 
+.challenge-group {
+  display: flex;
+  align-items: flex-end;
+}
+
 .challenge-label {
   font-weight: 700;
   margin-bottom: 12px;
@@ -57,5 +62,6 @@
 }
 
 .challenge-span {
-  text-align: left;
+  min-width: 80px;
+  margin-bottom: 8px;
 }

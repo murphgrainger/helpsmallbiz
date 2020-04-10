@@ -14,6 +14,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import CurrencyInput from './CurrencyInput';
 
 export default function FormSupport(props) {
   return (
@@ -24,13 +25,6 @@ export default function FormSupport(props) {
          <a href={props.info.website} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LanguageIcon fontSize="small"/></IconButton></a>
        </h5>
       <Grid container spacing={1} alignItems="center">
-          <Grid item xs={12} sm={6}>
-             <TextField required id="standard-basic" variant="outlined" name="amount" type="text" step='0.01' label="Amount" fullWidth onChange={props.handleChange} InputProps={{
-                startAdornment: (<InputAdornment position="start">
-                  <AttachMoneyIcon/>
-                </InputAdornment>)
-              }}/>
-          </Grid>
           <Grid item xs={12} sm={6}>
           <FormControl variant="outlined" fullWidth required>
             <InputLabel id="demo-simple-select-outlined-label" style={{"paddingRight":"8px", "background":"white"}}>How Your Supported</InputLabel>
@@ -50,6 +44,9 @@ export default function FormSupport(props) {
                 <MenuItem value={"Other"}>Other</MenuItem>
               </Select>
             </FormControl>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <CurrencyInput type="text" handleChange={props.handleChange} amount={props.amount} variant={"outlined"}/>
         </Grid>
         <Grid item xs={12}>
           <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose to support this business?" fullWidth onChange={props.handleChange}/>

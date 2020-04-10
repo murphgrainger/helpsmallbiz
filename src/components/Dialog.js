@@ -69,7 +69,13 @@ class FormDialog extends React.Component {
       if (result.status !== 200) throw new Error ();
       this.props.refreshBusinesses();
       this.setState({
-        open: false
+        open: false,
+        firstName: "",
+        lastName: "",
+        description: "",
+        amount: "",
+        type: "",
+        terms: false
       })
     }
   catch {
@@ -89,7 +95,7 @@ render() {
       <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
         <h2 className="form-title">Log Support</h2>
         <DialogContent>
-          <FormSupport info={this.props.info} onSubmit={this.onSubmit} handleClose={this.handleClose} handleChange={this.handleChange} type={this.state.type}/>
+          <FormSupport info={this.props.info} onSubmit={this.onSubmit} handleClose={this.handleClose} handleChange={this.handleChange} amount={this.state.amount} type={this.state.type}/>
         </DialogContent>
       </Dialog>
     </div>
