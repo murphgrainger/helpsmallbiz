@@ -79,10 +79,10 @@ render() {
   <div className="section -white">
     <Container maxWidth="md" className="container">
       <h2 className="text-green secondary-subheader">WE BUILT THIS SITE TO MAKE SUPPORTING LOCAL BUSINESSES <br></br>FUN AND PERSONAL.</h2>
-        <Grid container spacing={2} justify="center" className="home-howto">
-          <Grid item md={4}>
+        <Grid container spacing={2} justify="center" align="center" className="home-howto">
+          <Grid item xs={12} md={4}>
       <Card className="home-card">
-                      <CardContent>
+            <CardContent>
             <span className="list-icon">1</span>
             <h5 className="text-red">You Create a Challenge</h5>
             <p>to incentivize your friends to support a local biz you care about</p>
@@ -91,8 +91,9 @@ render() {
               </CardContent>
               </Card>
           </Grid>
-            <Grid item md={4}>
-              <Card className="home-card">                <CardContent>
+            <Grid item xs={12} md={4}>
+              <Card className="home-card">
+                <CardContent>
                   <span className="list-icon">2</span>
                   <h5 className="text-red">Get Friends to Log Support</h5>
                   <p>to your challenge through orders, gift cards, deliveries, and beyond</p>
@@ -105,7 +106,7 @@ render() {
               </CardContent>
             </Card>
             </Grid>
-              <Grid item md={4}>
+              <Grid item xs={12} md={4}>
                 <Card className="home-card">
                   <CardContent>
                 <span className="list-icon">3</span>
