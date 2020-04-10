@@ -19,6 +19,7 @@ import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import PledgeCard from './CardHorizontal';
 import Dialog from './Dialog';
 import PersonIcon from '@material-ui/icons/Person';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 const styles = theme => ({
   root: {
@@ -27,7 +28,9 @@ const styles = theme => ({
     flexDirection: 'row',
     textAlign: 'left',
     flexWrap: 'wrap',
-    marginBottom: 20
+    marginBottom: 20,
+    position: 'relative',
+    overflow: 'visible'
   },
   header: {
     background: "#e6e6e6",
@@ -44,7 +47,10 @@ const styles = theme => ({
     color: 'white'
   },
   wrapper: {
-    padding: '12px'
+    padding: '12px',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column'
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -78,15 +84,16 @@ const styles = theme => ({
     color: "#1B5460",
     fontWeight: 700
   },
+  redIcon: {
+    color: "#CA3739",
+    fontWeight: 700
+  },
   spaceBetween: {
     justifyContent: "space-between",
     padding: "0 16px 12px 16px"
   },
   spanText: {
-    position: "absolute",
     color: "#1B5460",
-    right: 5,
-    top: 32,
     fontSize: 12
   }
 });
@@ -132,8 +139,15 @@ render() {
   const pledges = this.props.info.pledges.map((pledge, i) => {
     return (<PledgeCard key={i} info={pledge}/>)
   })
+
+  const amountToGoal = this.props.info.amount - this.props.info.amountRaised;
+
   return (
     <Card className={classes.root}>
+      {amountToGoal <= 0 ?
+        <div className="challenge-complete"><CheckCircleIcon fontSize="large" className={classes.greenIcon}/></div>
+        : null
+      }
       <Grid item xs={12} style={{'display':'flex', 'flexWrap':'wrap'}}>
       <CardMedia
         className='card-media'
@@ -143,7 +157,8 @@ render() {
            <h3 className="card-business-title">
               {this.props.info.businessName}
             </h3>
-                <div><a href={`https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${this.props.info.place_id}`} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LocationOnIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
+              <div>
+                <a href={`https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${this.props.info.place_id}`} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LocationOnIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
                 <a href={`tel:${this.props.info.businessPhone}`}><IconButton size="small"><PhoneIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
                 <a href={this.props.info.website} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LanguageIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
             </div>
@@ -151,7 +166,7 @@ render() {
        </div>
        </CardMedia>
    <Grid item xs={12} md={9}>
-     <Grid container spacing={1} justify="space-between" className={classes.header}>
+     <Grid container justify="space-between" className={classes.header}>
        <Grid item md={9} className={classes.alignLeft}>
           <Typography variant="h6" className="text-red" component="p">
             <StarIcon fontSize="small" className="text-red"/> If we log ${this.props.info.amount}, I will {this.props.info.challenge}
@@ -160,8 +175,8 @@ render() {
        <Grid item md={3} className={classes.alignRight} style={{"position":"relative"}}>
            {this.props.info.amountRaised > 0
              ? <Typography variant="h5" color="textSecondary" component="p" className={classes.greenIcon}>${this.props.info.amountRaised}</Typography>
-           : <Typography variant="h5" color="textSecondary" component="p" className={classes.greenIcon}>$0</Typography>}
-              <span className={classes.spanText}>Logged</span>
+           : <Typography variant="h5" color="textSecondary" component="p" className={classes.greenIcon}>$0.00</Typography>}
+              <span className={classes.spanText}>of ${this.props.info.amount} logged</span>
        </Grid>
      </Grid>
    <CardContent className={classes.cardContent}>

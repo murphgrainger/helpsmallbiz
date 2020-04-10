@@ -50,7 +50,7 @@ export default function FormattedInputs(props) {
 
   return (
       <TextField
-        label="Amount"
+        label="amount"
         value={props.amount}
         onChange={props.handleChange}
         variant={props.variant}

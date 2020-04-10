@@ -150,7 +150,7 @@ class AddBusiness extends Component {
             onChange = {
               this.handleChange
             }
-            name = "terms" />} label="I understand my email will not be distributed or displayed. Solely the administrator will look at this information to see if you're a real human."/>
+            name = "terms" />} label="I understand my email will not be distributed or displayed. Solely the administrator will look at this information to see if I'm a real human."/>
         </Grid>
         <Box mt={2}>
           <Grid container spacing={1} alignItems="center" justify="center">

@@ -69,7 +69,13 @@ class FormDialog extends React.Component {
       if (result.status !== 200) throw new Error ();
       this.props.refreshBusinesses();
       this.setState({
-        open: false
+        open: false,
+        firstName: "",
+        lastName: "",
+        description: "",
+        amount: "",
+        type: "",
+        terms: false
       })
     }
   catch {
