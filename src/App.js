@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Home from './pages/Home';
 import AddBusiness from './pages/AddBusiness';
@@ -12,7 +12,8 @@ function App() {
       <Switch>
       <Route path='/' component={Home} exact/>
       <Route path='/add-a-business' component={AddBusiness} />
-      <Route component={FourOhFour}/>
+      <Route path='/four-oh-four' component={FourOhFour}/>
+      <Redirect to="/four-oh-four" />
       </Switch>
     </main>
     </div>
