@@ -79,7 +79,8 @@ const styles = theme => ({
     fontWeight: 700
   },
   spaceBetween: {
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    padding: "0 16px 12px 16px"
   },
   spanText: {
     position: "absolute",
@@ -159,16 +160,16 @@ render() {
        <Grid item md={3} className={classes.alignRight} style={{"position":"relative"}}>
            {this.props.info.amountRaised > 0
              ? <Typography variant="h5" color="textSecondary" component="p" className={classes.greenIcon}>${this.props.info.amountRaised}</Typography>
-           : <Typography variant="h5" color="textSecondary" component="p">$0</Typography>}
-                {this.props.info.amountRaised > 0 ? <span className={classes.spanText}>Logged</span> : null}
+           : <Typography variant="h5" color="textSecondary" component="p" className={classes.greenIcon}>$0</Typography>}
+              <span className={classes.spanText}>Logged</span>
        </Grid>
      </Grid>
    <CardContent className={classes.cardContent}>
-     <p variant="body1" component="p" className={classes.greenIcon} style={{"display": "flex", "alignItems":"center", "marginTop": "0"}}>
+     <p variant="body1" component="p" className={classes.greenIcon} style={{"display": "flex", "alignItems":"center", "margin": "0"}}>
        <PersonIcon size="small" className={classes.greenIcon} style={{"marginRight":"6px"}}/>{`${this.props.info.firstName} ${this.props.info.lastName}`}
      </p>
-     <Typography variant="body2" color="textSecondary" component="p">
-       <strong>Why: </strong>{this.props.info.description}
+     <Typography variant="body2" color="textSecondary" component="p" style={{"marginLeft": "30px"}}>
+       {this.props.info.description}
      </Typography>
       </CardContent>
         <CardActions className={classes.spaceBetween}>
