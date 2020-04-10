@@ -15,6 +15,7 @@ import Box from '@material-ui/core/Box';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import MailOutlineSharpIcon from '@material-ui/icons/MailOutlineSharp';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import CurrencyInput from '../components/CurrencyInput';
 
 class AddBusiness extends Component {
   constructor(props) {
@@ -41,6 +42,9 @@ class AddBusiness extends Component {
   }
 
   handleChange = (event) => {
+    console.log(event);
+    console.log(event.target.name);
+    console.log(event.target.value);
     const value = event.target.name === 'terms'
       ? !this.state.terms
       : event.target.value;
@@ -115,27 +119,6 @@ class AddBusiness extends Component {
             <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose this business?" fullWidth onChange={this.handleChange}/>
           </Grid>
           <Grid item xs={12}>
-              <p className="challenge-label">Your Challenge
-              </p>
-          </Grid>
-            <Grid item xs={5} sm={2}>
-            <p className="challenge-span">If we log ...</p>
-          </Grid>
-          <Grid item xs={7} sm={4}>
-              <TextField required id="standard-basic" variant="outlined" name="amount" label="Amount" fullWidth onChange={this.handleChange} InputProps={{
-                 startAdornment: (<InputAdornment position="start">
-                   <AttachMoneyIcon/>
-                 </InputAdornment>)
-               }}/>
-             </Grid>
-
-           <Grid item xs={12} sm={6}>
-             <p className="challenge-span" style={{"textAlign": "left"}}>&nbsp; ... I will ...</p>
-             </Grid>
-             <Grid item xs={12}>
-               <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="challenge" placeholder="ex: order 10 pizzas for my street." fullWidth onChange={this.handleChange}/>
-          </Grid>
-          <Grid item xs={12}>
               <p className="challenge-label">Your Information</p>
             </Grid>
           <Grid item xs={6}>
@@ -145,11 +128,18 @@ class AddBusiness extends Component {
             <TextField id="standard-basic" variant="outlined" label="Last Name" name="lastName" fullWidth onChange={this.handleChange}/>
           </Grid>
           <Grid item xs={12}>
-            <TextField required id="standard-basic" variant="outlined" type="email" label="Email" name="email" placeholder="for internal use only" fullWidth onChange={this.handleChange} InputProps={{
-                startAdornment: (<InputAdornment position="start">
-                  <MailOutlineSharpIcon/>
-                </InputAdornment>)
-              }}/>
+            <TextField required id="standard-basic" variant="outlined" type="email" label="Email" name="email" placeholder="for internal use only" fullWidth onChange={this.handleChange}/>
+          </Grid>
+          <Grid item xs={12}>
+              <p className="challenge-label" style={{"marginBottom":"0"}}>Your Challenge</p>
+          </Grid>
+          <Grid item xs={12} className="challenge-group" sm={6}>
+            <p className="challenge-span">If we log &nbsp;&nbsp;&nbsp;&nbsp; </p>
+            <CurrencyInput type="text" handleChange={this.handleChange} amount={this.state.amount}/>
+              <p className="challenge-span">I will...</p>
+             </Grid>
+             <Grid item xs={12}>
+               <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="challenge" placeholder="ex: order 10 pizzas for my street." fullWidth onChange={this.handleChange}/>
           </Grid>
         </Grid>
       <div className="form-footer">
@@ -160,11 +150,11 @@ class AddBusiness extends Component {
             onChange = {
               this.handleChange
             }
-            name = "terms" />} label="I understand my email will not be distributed or displayed. Solely the administrator will look at this information to see if you're a real human."/>
+            name = "terms" />} label="I understand my email will not be distributed or displayed. Solely the administrator will look at this information to see if I'm a real human."/>
         </Grid>
         <Box mt={2}>
           <Grid container spacing={1} alignItems="center" justify="center">
-            <Button className="submit-button" type="submit" variant="contained" color="primary">Add Business</Button>
+            <Button className="submit-button" type="submit" variant="contained" color="secondary">Add Challenge</Button>
           </Grid>
         </Box>
         {this.state.showError &&
