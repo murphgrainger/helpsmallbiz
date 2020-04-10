@@ -46,7 +46,7 @@ export default function MediaControlCard(props) {
   return (
     <List className="card-pledge">
       <ListItem>
-        <ListItemIcon>
+        <ListItemIcon className="pledge-icon">
           <Avatar>
             <TrendingUpIcon className={classes.greenIcon} />
           </Avatar>
