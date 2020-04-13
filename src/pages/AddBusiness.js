@@ -16,6 +16,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import MailOutlineSharpIcon from '@material-ui/icons/MailOutlineSharp';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import CurrencyInput from '../components/CurrencyInput';
+import Footer from '../components/Footer';
 
 class AddBusiness extends Component {
   constructor(props) {
@@ -164,7 +165,11 @@ class AddBusiness extends Component {
         }
       </div>
     </form>
-  </div> </Container></div></>
+  </div> </Container>
+
+  </div>
+  <Footer color="secondary"/>
+</>
 )
 }
 }

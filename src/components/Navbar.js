@@ -10,7 +10,7 @@ function Navbar(props) {
     <AppBar position="static" className="Navbar" >
       <Grid container alignItems="flex-end" justify="flex-end">
         <Box mr={1}>
-          <Button color="primary" variant="outlined" href="/add-a-business">Add a Challenge</Button>
+          <Button color="primary" variant="outlined" href="/add-a-challenge">Add a Challenge</Button>
         </Box>
         <Button color="secondary" variant="contained" href="#challenges">Log Support</Button>
       </Grid>
