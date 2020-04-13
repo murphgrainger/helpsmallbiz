@@ -11,7 +11,7 @@ function App() {
     <main>
       <Switch>
       <Route path='/' component={Home} exact/>
-      <Route path='/add-a-business' component={AddBusiness} />
+      <Route path='/add-a-challenge' component={AddBusiness} />
       <Route path='/four-oh-four' component={FourOhFour}/>
       <Redirect to="/four-oh-four" />
       </Switch>
