@@ -7,7 +7,7 @@ import Box from '@material-ui/core/Box';
 
 function Footer(props) {
   return (
-    <AppBar position="static" className="Footer" >
+    <AppBar position="static" className="Footer" color={props.color}>
       <Grid container alignItems="center" justify="center">
         <p>Questions? Have improvement ideas? <a href="mailto:2020localbiz.challenge@gmail.com">Email Us</a></p>
       </Grid>

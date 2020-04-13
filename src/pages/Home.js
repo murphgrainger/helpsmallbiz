@@ -8,7 +8,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Divider from '@material-ui/core/Divider';
 import Footer from '../components/Footer';
-
+import BusinessIcon from '@material-ui/icons/Business';
 import Image from '../assets/images/palm-icon.png'
 
 import Navbar from '../components/Navbar';
@@ -127,32 +127,39 @@ render() {
   <div className="section -grey" id="challenges">
   <Container maxWidth="lg" className="">
     <h2>Current Challenges</h2>
-    <Grid container spacing={2} justify="center">
+    <Grid container spacing={3} justify="center">
       <Grid item xs={12} md={9} className="goal-bar">
         {this.state.cards}
-        <div>
-        <p>Passionate about a different business not listed?</p>
-        <Button variant="contained" color="primary" href="/add-a-business">Add a Challenge</Button>
-        </div>
       </Grid>
-      <Grid item xs={12} md={3}>
-        <Card>
-          <CardContent>
-            <span className="list-icon">?</span>
-            <h5 className="text-red">How Do I Support</h5>
-            <p></p>
-          <Divider />
-            <ul style={{"paddingLeft":"1em"}}>
-              <li>Buy a gift card online</li>
-              <li>Use 3rd Party services like GrubHub</li>
-              <li>Venmo the owner or employee straight cash</li>
-            <li>Pay for a month of your gym membership even though you can't go</li>
-            <li>Buy gifts for friends in quarantine</li>
-            <li>Send a pizza to an essential worker</li>
-            <li> Buy a 6-month supply of coffee upfront</li>
-          </ul>
+      <Grid item xs={12} md={3} container direction="column" spacing={2}>
+        <Grid item>
+          <Card>
+            <CardContent>
+              <span className="list-icon">?</span>
+              <h5 className="text-red">How Do I Support</h5>
+              <p></p>
+            <Divider />
+              <ul style={{"paddingLeft":"1em"}}>
+                <li>Buy a gift card online</li>
+                <li>Use 3rd Party services like GrubHub</li>
+                <li>Venmo the owner or employee straight cash</li>
+              <li>Pay for a month of your gym membership even though you can't go</li>
+              <li>Buy gifts for friends in quarantine</li>
+              <li>Send a pizza to an essential worker</li>
+              <li> Buy a 6-month supply of coffee upfront</li>
+            </ul>
         </CardContent>
-      </Card>
+        </Card>
+      </Grid>
+      <Grid item>
+            <Card>
+              <CardContent>
+                <BusinessIcon color="secondary"/>
+                <h5 className="text-red">Passionate about another business not listed?</h5>
+                  <Button color="secondary" variant="outlined" href="/add-a-challenge">Add a Challenge</Button>
+            </CardContent>
+          </Card>
+        </Grid>
       </Grid>
   </Grid>
     </Container>
