@@ -55,6 +55,24 @@
   position: relative;
 }
 
+.icon-wrapper {
+  margin-top: 2px;
+  margin-left: -7px;
+
+  a:hover {
+    .biz-icon {
+      color: $color-red;
+      transition: color 80ms cubic-bezier(0.4, 0, 0.2, 1) 0ms
+    }
+  }
+
+  .biz-icon {
+    color: white;
+    transition: color 80ms cubic-bezier(0.4, 0, 0.2, 1) 0ms
+  }
+}
+
+
 @media (max-width: 960px) {
   .card-header-amount {
     text-align: left;

@@ -122,9 +122,13 @@ class CardBusiness extends React.Component {
       await service.getDetails({
         placeId: biz.place_id
       }, (place, status) => {
+        const address = place.address_components.filter(e => {
+          return e.types.some(sub => sub === "locality")
+        })
         if (status === window.google.maps.places.PlacesServiceStatus.OK && place.photos) {
           this.setState({
-            photoUrl:place.photos[0].getUrl()
+            photoUrl:place.photos[0].getUrl(),
+            address: address[0].long_name || ""
           })
         }
       })
@@ -154,11 +158,14 @@ render() {
            <h3 className="card-business-title">
               {this.props.info.businessName}
             </h3>
-              <div>
-                <a href={`https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${this.props.info.place_id}`} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LocationOnIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
-                <a href={`tel:${this.props.info.businessPhone}`}><IconButton size="small"><PhoneIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
-                <a href={this.props.info.website} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LanguageIcon className={classes.whiteIcon} fontSize="small"/></IconButton></a>
+            <span>{this.state.address}</span>
+
+              <div className="icon-wrapper">
+                <a href={`https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${this.props.info.place_id}`} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LocationOnIcon className="biz-icon" fontSize="small"/></IconButton></a>
+                <a href={`tel:${this.props.info.businessPhone}`}><IconButton size="small"><PhoneIcon className="biz-icon" fontSize="small"/></IconButton></a>
+                <a href={this.props.info.website} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LanguageIcon className="biz-icon" fontSize="small"/></IconButton></a>
             </div>
+
           </div>
        </div>
        </CardMedia>
