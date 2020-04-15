@@ -5,6 +5,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 
 import FormSupport from './FormSupport';
 
+import accounting from 'accounting';
+
 class FormDialog extends React.Component {
   constructor(props) {
     super(props);
@@ -57,6 +59,7 @@ class FormDialog extends React.Component {
       amount,
       type
     };
+    data.amount = accounting.unformat(data.amount);
     try {
       let response = await fetch(`/pledge/${this.props.info.id}`, {
         method: 'POST',
@@ -94,7 +97,7 @@ render() {
       </Button>
       <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
         <h2 className="form-title">Log Support</h2>
-        <DialogContent>
+        <DialogContent  className="dialog">
           <FormSupport info={this.props.info} onSubmit={this.onSubmit} handleClose={this.handleClose} handleChange={this.handleChange} amount={this.state.amount} type={this.state.type}/>
         </DialogContent>
       </Dialog>

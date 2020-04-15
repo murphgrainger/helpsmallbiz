@@ -20,10 +20,11 @@ export default function FormSupport(props) {
   return (
     <form className="support-form" autoComplete="off" onSubmit={props.onSubmit}>
       <h5 className="form-business-title">
-         {props.info.businessName} <a href={`https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${props.info.place_id}`} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LocationOnIcon fontSize="small"/></IconButton></a>
-         <a href={`tel:${props.info.businessPhone}`}><IconButton size="small"><PhoneIcon fontSize="small"/></IconButton></a>
-         <a href={props.info.website} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LanguageIcon fontSize="small"/></IconButton></a>
-       </h5>
+         {props.info.businessName}</h5>
+       <div><a href={`https://www.google.com/maps/search/?api=1&query=Google&query_place_id=${props.info.place_id}`} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LocationOnIcon fontSize="small"/></IconButton></a>
+       <a href={`tel:${props.info.businessPhone}`}><IconButton size="small"><PhoneIcon fontSize="small"/></IconButton></a>
+       <a href={props.info.website} target="_blank" rel="noopener noreferrer"><IconButton size="small"><LanguageIcon fontSize="small"/></IconButton></a>
+     </div>
       <Grid container spacing={1} alignItems="center">
           <Grid item xs={12} sm={6}>
           <FormControl variant="outlined" fullWidth required>
@@ -46,10 +47,10 @@ export default function FormSupport(props) {
             </FormControl>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <CurrencyInput type="text" handleChange={props.handleChange} amount={props.amount} variant={"outlined"}/>
+          <CurrencyInput type="text" handleChange={props.handleChange} amount={props.amount} variant={"outlined"} name={"Amount"}/>
         </Grid>
         <Grid item xs={12}>
-          <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose to support this business?" fullWidth onChange={props.handleChange}/>
+          <TextField required id="standard-basic" multiline rowsMax="2" variant="outlined" name="description" label="Why did you choose this business?" fullWidth onChange={props.handleChange}/>
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField required id="standard-basic" variant="outlined" label="First Name" name="firstName" fullWidth onChange={props.handleChange}/>
