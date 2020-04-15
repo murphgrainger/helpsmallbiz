@@ -43,9 +43,6 @@ class AddBusiness extends Component {
   }
 
   handleChange = (event) => {
-    console.log(event);
-    console.log(event.target.name);
-    console.log(event.target.value);
     const value = event.target.name === 'terms'
       ? !this.state.terms
       : event.target.value;
@@ -81,6 +78,7 @@ class AddBusiness extends Component {
     event.preventDefault();
     const { firstName, lastName, email, description, challenge, businessName, place_id, amount, businessAddress, businessPhone, website } = this.state;
     const data = { firstName, lastName, email, description, challenge, businessName, place_id, amount, businessAddress, businessPhone, website };
+    data.amount = data.amount.split('$')[1];
       try {
         let response = await fetch('/goal/add', {
           method: 'POST',

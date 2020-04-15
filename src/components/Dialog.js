@@ -57,6 +57,7 @@ class FormDialog extends React.Component {
       amount,
       type
     };
+    data.amount = data.amount.split('$')[1];
     try {
       let response = await fetch(`/pledge/${this.props.info.id}`, {
         method: 'POST',
@@ -94,7 +95,7 @@ render() {
       </Button>
       <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
         <h2 className="form-title">Log Support</h2>
-        <DialogContent>
+        <DialogContent  className="dialog">
           <FormSupport info={this.props.info} onSubmit={this.onSubmit} handleClose={this.handleClose} handleChange={this.handleChange} amount={this.state.amount} type={this.state.type}/>
         </DialogContent>
       </Dialog>
