@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import { withRouter } from 'react-router-dom';
+
+import accounting from 'accounting';
+
 import Container from '@material-ui/core/Container';
 import Navbar from '../components/NavbarSecondary';
 
@@ -78,7 +81,7 @@ class AddBusiness extends Component {
     event.preventDefault();
     const { firstName, lastName, email, description, challenge, businessName, place_id, amount, businessAddress, businessPhone, website } = this.state;
     const data = { firstName, lastName, email, description, challenge, businessName, place_id, amount, businessAddress, businessPhone, website };
-    data.amount = data.amount.split('$')[1];
+    data.amount = accounting.unformat(data.amount);
       try {
         let response = await fetch('/goal/add', {
           method: 'POST',

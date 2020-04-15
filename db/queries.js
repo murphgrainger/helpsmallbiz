@@ -15,7 +15,7 @@ module.exports = {
       businessPhone: b.businessPhone,
       website: b.website,
       amountRaised: 0,
-      amount: Number(b.amount)
+      amount: b.amount
     })
   },
 

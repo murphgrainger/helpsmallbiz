@@ -5,6 +5,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 
 import FormSupport from './FormSupport';
 
+import accounting from 'accounting';
+
 class FormDialog extends React.Component {
   constructor(props) {
     super(props);
@@ -57,7 +59,7 @@ class FormDialog extends React.Component {
       amount,
       type
     };
-    data.amount = data.amount.split('$')[1];
+    data.amount = accounting.unformat(data.amount);
     try {
       let response = await fetch(`/pledge/${this.props.info.id}`, {
         method: 'POST',
