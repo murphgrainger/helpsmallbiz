@@ -15,7 +15,7 @@ module.exports = {
       businessPhone: b.businessPhone,
       website: b.website,
       amountRaised: 0,
-      amount: Number(b.amount)
+      amount: b.amount
     })
   },
 
@@ -30,7 +30,7 @@ module.exports = {
       lastName: data.lastName,
       email: data.email,
       description: data.description,
-      amount: Number(data.amount),
+      amount: data.amount,
       type: data.type,
       instagram: data.instagram,
       anonymous: data.anonymous,
