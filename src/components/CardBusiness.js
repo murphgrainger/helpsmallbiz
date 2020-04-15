@@ -122,7 +122,7 @@ class CardBusiness extends React.Component {
       await service.getDetails({
         placeId: biz.place_id
       }, (place, status) => {
-        const address = place.address_components.filter(e => {
+        const address = place && place.address_components && place.address_components.filter(e => {
           return e.types.some(sub => sub === "locality")
         })
         if (status === window.google.maps.places.PlacesServiceStatus.OK && place.photos) {

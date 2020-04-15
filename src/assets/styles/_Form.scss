@@ -29,6 +29,9 @@
 
 .form-business-title {
   margin: 12px;
+  margin-bottom: 0;
+  width: 100%;
+  text-align: center;
 }
 
 .radio-label {
@@ -64,4 +67,12 @@
 .challenge-span {
   min-width: 80px;
   margin-bottom: 8px;
+}
+
+@media (max-width: 600px) {
+
+  .dialog {
+    padding: 0!important;
+  }
+
 }
