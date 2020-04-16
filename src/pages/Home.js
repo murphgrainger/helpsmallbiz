@@ -100,7 +100,7 @@ render() {
                 <Divider />
                   <ul>
                     <li>Sarah order $50 delivery</li>
-                    <li>Roque bough $10 gift card</li>
+                    <li>Johnny bought $10 gift card</li>
                     <li>Brooke donated $40</li>
                 </ul>
               </CardContent>
