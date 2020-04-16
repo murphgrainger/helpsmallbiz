@@ -99,8 +99,8 @@ render() {
                   <p>to your challenge through orders, gift cards, deliveries, and beyond</p>
                 <Divider />
                   <ul>
-                    <li>Sarah order $50 delivery</li>
-                    <li>Johnny bought $10 gift card</li>
+                    <li>Sarah ordered $50 delivery</li>
+                    <li>Pat bought a $10 gift card</li>
                     <li>Brooke donated $40</li>
                 </ul>
               </CardContent>
